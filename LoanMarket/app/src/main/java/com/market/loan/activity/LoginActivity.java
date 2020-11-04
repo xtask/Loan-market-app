@@ -1,8 +1,8 @@
 package com.market.loan.activity;
 
-import android.content.ContentValues;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -10,8 +10,9 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.market.loan.R;
+import com.market.loan.MainActivity;
 import com.market.loan.NoBarActivity;
+import com.market.loan.R;
 import com.market.loan.bean.LoginResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Status;
@@ -48,8 +49,16 @@ public class LoginActivity extends NoBarActivity {
             @Override
             public void onChanged(Result<LoginResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
-                    Log.d(ContentValues.TAG, result.toString());
-                }else{
+
+                    SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = profile.edit();
+                    edit.putString("token", result.getData().getToken());
+                    edit.apply();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
                     Toast.makeText(getBaseContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

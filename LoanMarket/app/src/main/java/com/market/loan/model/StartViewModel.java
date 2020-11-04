@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.LoginResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
@@ -21,44 +22,38 @@ import okhttp3.Call;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginViewModel extends ViewModel {
+public class StartViewModel extends ViewModel {
 
-    public LoginViewModel() {
+    public StartViewModel() {
 
     }
 
-    private MutableLiveData<Result<LoginResult>> loginResult;
+    private MutableLiveData<Result<ConfigResult>> configResult;
 
-    public LiveData<Result<LoginResult>> getLoginResult() {
-        if (loginResult == null) {
-            loginResult = new MutableLiveData<>();
+    public LiveData<Result<ConfigResult>> getConfigResult() {
+        if (configResult == null) {
+            configResult = new MutableLiveData<>();
         }
-        return loginResult;
+        return configResult;
     }
 
 
-
-    public void login(String mobile, String code) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("mobile", mobile);
-            json.put("code", code);
-        } catch (JSONException ignored) {
-        }
-        Call call = new HttpRequest().post(Apis.LOGIN_URI, RequestBody.create(HttpRequest.JSON, String.valueOf(json)));
+    public void request() {
+        Call call = new HttpRequest().get(Apis.CONFIG_URI, RequestBody.create(HttpRequest.JSON, ""));
         call.enqueue(new CallbackAdapter() {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<LoginResult> result = new Result<>("Network request failed.");
-                LoginViewModel.this.loginResult.postValue(result);
+                Result<ConfigResult> result = new Result<>("Network request failed.");
+                StartViewModel.this.configResult.postValue(result);
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                 String resultBody = response.body().string();
-                Result<LoginResult> result = JSON.parseObject(resultBody, new TypeReference<Result<LoginResult>>(){});
-                LoginViewModel.this.loginResult.postValue(result);
+                Result<ConfigResult> result = JSON.parseObject(resultBody, new TypeReference<Result<ConfigResult>>() {});
+                StartViewModel.this.configResult.postValue(result);
             }
         });
     }

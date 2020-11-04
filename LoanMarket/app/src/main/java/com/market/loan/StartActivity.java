@@ -1,35 +1,90 @@
 package com.market.loan;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.market.loan.activity.FeedbackActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.alibaba.fastjson.JSON;
 import com.market.loan.activity.LoginActivity;
-import com.market.loan.activity.PayActivity;
-import com.market.loan.activity.PayEndActivity;
+import com.market.loan.bean.ConfigResult;
+import com.market.loan.bean.Result;
+import com.market.loan.constant.Status;
+import com.market.loan.model.StartViewModel;
 
 public class StartActivity extends NoBarActivity {
 
-    SharedPreferences config;
+    private StartViewModel startViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_start);
         super.onCreate(savedInstanceState);
+        startViewModel = new ViewModelProvider(this).get(StartViewModel.class);
+        startViewModel.getConfigResult().observe(this, new Observer<Result<ConfigResult>>() {
+            @Override
+            public void onChanged(Result<ConfigResult> result) {
+                if (result.getStatus() == Status.SUCCESS_CODE) {
+                    saveConfig(result.getData());
+                    selectorActivity();
+                } else {
+                    new AlertDialog.Builder(StartActivity.this)
+                            .setTitle(result.getMessage())
+                            .setPositiveButton("exit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    System.exit(0);
+                                }
+                            })
+                            .setNegativeButton("retry", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startViewModel.request();
+                                }
+                            }).show();
+                }
+            }
+        });
         Thread thread = new Thread() {
             @Override
             public void run() {
                 try {
-                    sleep(100);
+                    sleep(3000);
+                    startViewModel.request();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // is login
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
             }
         };
         thread.start();
+    }
+
+    private void selectorActivity() {
+        Class<?> activityClass;
+        SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+        String token = profile.getString("token", null);
+        if (token == null) {
+            activityClass = LoginActivity.class;
+        } else {
+            activityClass = MainActivity.class;
+        }
+        Intent intent = new Intent(getApplicationContext(), activityClass);
+        startActivity(intent);
+        finish();
+
+    }
+
+
+    private void saveConfig(ConfigResult configResult) {
+        SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+        SharedPreferences.Editor edit = profile.edit();
+        edit.putString("configResult", JSON.toJSONString(configResult));
+        edit.apply();
     }
 }

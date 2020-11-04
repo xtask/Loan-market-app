@@ -46,7 +46,16 @@ public class HttpRequest {
         return Headers.of(headerMap);
     }
 
-    public Call request(String uri, RequestBody requestBody) {
+    public Call get(String uri, RequestBody requestBody) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(Constants.DOMAIN + uri)
+                .headers(getHeaders())
+                .post(requestBody)
+                .build();
+        return client.newCall(request);
+    }
+
+    public Call post(String uri, RequestBody requestBody) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(Constants.DOMAIN + uri)
                 .headers(getHeaders())

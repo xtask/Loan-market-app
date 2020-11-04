@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="RedTheme" parent="AppTheme">
+    <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -27,8 +27,10 @@
 
 
     <style name="RedTheme.NoActionBar" parent="RedTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="RedTheme.NoActionBar.NoStatus" parent="RedTheme.NoActionBar">
@@ -37,11 +39,6 @@
 
     <style name="RedTheme.NoActionBar.Start" parent="RedTheme.NoActionBar">
         <item name="android:windowBackground">@mipmap/start_background</item>
-    </style>
-
-    <style name="RedTheme.NoActionBar.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="RedTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
