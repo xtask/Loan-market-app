@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">LoanMarket</string>
+
+    <!--start page-->
+    <string name="start_title">CASH GRANT</string>
+    <!--login page-->
+    <string name="login_username">username:</string>
+    <string name="login_password">password:</string>
+    <!--home page-->
+    <!--cert page-->
+    <!--audit page-->
+    <!--audit success page-->
+    <!--pay page-->
+    <!--self page-->
+
+
+</resources>

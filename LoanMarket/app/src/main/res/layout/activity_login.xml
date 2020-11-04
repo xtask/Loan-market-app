@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#4258BA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/bg_selector"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="44dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:lineHeight="30dp"
+            android:text="Registration with the mobile number which is linked to your Aadhear card"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="51dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="42dp"
+            android:src="@mipmap/phone_area" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edit_selector"
+                android:drawableStart="@mipmap/edit_phone"
+                android:fontFamily="@font/work_sans_bold"
+                android:gravity="center_vertical|center"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:textColor="#2A26A0"
+                android:textSize="34.56sp"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+            <com.google.android.material.circularreveal.CircularRevealFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_selector"
+                    android:drawableStart="@mipmap/edit_sms_code"
+                    android:fontFamily="@font/work_sans_bold"
+                    android:gravity="center_vertical|center"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:textColor="#2A26A0"
+                    android:textSize="34.56sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="27dp"
+                    android:text="code"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="60dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="18dp"
+                android:gravity="center"
+                android:text="（56）"
+                android:textColor="#ffbdbdbd"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="resend"
+                android:textColor="#ff0f0f0f"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="RtlHardcoded" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:background="@mipmap/radio_check" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="251dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="6dp"
+                android:gravity="center_vertical"
+                android:text="I have read and agreed to the"
+                android:textColor="#ff929292"
+                android:textSize="16sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="251dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="74dp"
+                android:text="Terms of service&amp;privacy policy. "
+                android:textColor="#ff25228f"
+                android:textSize="16sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/next_button">
+
+        </androidx.appcompat.widget.AppCompatImageButton>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

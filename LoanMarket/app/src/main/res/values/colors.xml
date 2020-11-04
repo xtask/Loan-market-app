@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+
+    <!--start page-->
+    <color name="startTitleColor">#2A26A0</color>
+    <!--login page-->
+    <!--home page-->
+    <!--cert page-->
+    <!--audit page-->
+    <!--audit success page-->
+    <!--pay page-->
+    <!--self page-->
+</resources>

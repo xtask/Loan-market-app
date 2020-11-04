@@ -1,0 +1,15 @@
+<resources>
+
+    <!--start page-->
+    <dimen name="app_icon_margin_top">121dp</dimen>
+    <dimen name="app_icon_height">80dp</dimen>
+    <dimen name="app_icon_width">80dp</dimen>
+    <dimen name="start_page_title">34.56sp</dimen>
+    <!--login page-->
+    <!--home page-->
+    <!--cert page-->
+    <!--audit page-->
+    <!--audit success page-->
+    <!--pay page-->
+    <!--self page-->
+</resources>
