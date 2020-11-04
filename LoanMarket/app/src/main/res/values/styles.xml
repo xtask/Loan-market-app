@@ -15,12 +15,14 @@
         <item name="colorControlNormal">#89C6C2</item>
     </style>
 
-    <style name="RedTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <style name="RedTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionOverflowMenuStyle">@style/MenuStyle</item>
     </style>
+
     <style name="MenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
     </style>
+
     <style name="RedTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
@@ -32,8 +34,18 @@
     <style name="RedTheme.NoActionBar.NoStatus" parent="RedTheme.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
+
     <style name="RedTheme.NoActionBar.Start" parent="RedTheme.NoActionBar">
         <item name="android:windowBackground">@mipmap/start_background</item>
     </style>
+
+    <style name="RedTheme.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RedTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="RedTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

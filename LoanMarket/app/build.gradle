@@ -33,4 +33,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.alibaba:fastjson:1.2.47'
+
+
 }

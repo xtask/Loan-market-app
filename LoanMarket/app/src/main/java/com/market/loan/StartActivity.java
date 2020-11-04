@@ -25,7 +25,7 @@ public class StartActivity extends NoBarActivity {
                     e.printStackTrace();
                 }
                 // is login
-                Intent intent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
