@@ -16,6 +16,7 @@ import com.market.loan.activity.LoginActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Status;
+import com.market.loan.core.ConfigCache;
 import com.market.loan.model.StartViewModel;
 
 public class StartActivity extends NoBarActivity {
@@ -31,6 +32,7 @@ public class StartActivity extends NoBarActivity {
             @Override
             public void onChanged(Result<ConfigResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
+                    ConfigCache.configResult = result.getData();
                     saveConfig(result.getData());
                     selectorActivity();
                 } else {

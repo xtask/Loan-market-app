@@ -36,7 +36,14 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
+    private MutableLiveData<Result<String>> smsCode;
 
+    public LiveData<Result<String>> getSmsCode() {
+        if (smsCode == null) {
+            smsCode = new MutableLiveData<>();
+        }
+        return smsCode;
+    }
 
     public void login(String mobile, String code) {
         JSONObject json = new JSONObject();
@@ -59,6 +66,25 @@ public class LoginViewModel extends ViewModel {
                 String resultBody = response.body().string();
                 Result<LoginResult> result = JSON.parseObject(resultBody, new TypeReference<Result<LoginResult>>(){});
                 LoginViewModel.this.loginResult.postValue(result);
+            }
+        });
+    }
+
+    public void smsCode(String mobile) {
+        Call call = new HttpRequest().get(Apis.SMS_CODE_URL + "?mobile=" + mobile, RequestBody.create(HttpRequest.FORM, ""));
+        call.enqueue(new CallbackAdapter() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                super.onFailure(call, e);
+                Result<String> result = new Result<>("Network request failed.");
+                LoginViewModel.this.smsCode.postValue(result);
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                assert response.body() != null;
+                String resultBody = response.body().string();
+                Result<String> result = JSON.parseObject(resultBody, new TypeReference<Result<String>>(){});
+                LoginViewModel.this.smsCode.postValue(result);
             }
         });
     }

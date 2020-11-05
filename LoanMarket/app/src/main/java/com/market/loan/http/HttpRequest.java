@@ -15,6 +15,7 @@ import okhttp3.RequestBody;
 public class HttpRequest {
 
     public final static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    public final static MediaType FORM = MediaType.parse("application/x-www-form-urlencoded");
 
     private String token;
 

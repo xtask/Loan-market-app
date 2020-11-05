@@ -1,0 +1,7 @@
+package com.market.loan.core;
+
+import com.market.loan.bean.ConfigResult;
+
+public class ConfigCache {
+    public static ConfigResult configResult = new ConfigResult();
+}

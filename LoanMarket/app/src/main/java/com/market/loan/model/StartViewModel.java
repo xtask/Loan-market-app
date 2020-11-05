@@ -7,14 +7,10 @@ import androidx.lifecycle.ViewModel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.market.loan.bean.ConfigResult;
-import com.market.loan.bean.LoginResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
