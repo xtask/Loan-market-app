@@ -1,6 +1,7 @@
 package com.market.loan.http;
 
 import com.market.loan.constant.Constants;
+import com.market.loan.core.ConfigCache;
 import com.market.loan.core.SimpleCache;
 
 import java.util.HashMap;
@@ -17,18 +18,16 @@ public class HttpRequest {
     public final static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public final static MediaType FORM = MediaType.parse("application/x-www-form-urlencoded");
 
-    private String token;
-
     public HttpRequest() {
     }
 
     public HttpRequest(String token) {
-        this.token = token;
     }
 
     public String getToken() {
-        return token;
+        return ConfigCache.token;
     }
+
 
     public Headers getHeaders() {
         BasicHeader basicHeader = SimpleCache.getBasicHeader();
@@ -42,7 +41,7 @@ public class HttpRequest {
         headerMap.put("adid", basicHeader.getAdid());
         headerMap.put("gps_adid", basicHeader.getGpsAdid());
         if (getToken() != null) {
-            headerMap.put("token", token);
+            headerMap.put("token", getToken());
         }
         return Headers.of(headerMap);
     }

@@ -71,6 +71,7 @@ public class StartActivity extends NoBarActivity {
         Class<?> activityClass;
         SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
         String token = profile.getString("token", null);
+        ConfigCache.token = token;
         if (token == null) {
             activityClass = LoginActivity.class;
         } else {

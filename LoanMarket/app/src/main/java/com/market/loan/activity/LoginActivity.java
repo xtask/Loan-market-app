@@ -22,6 +22,8 @@ import com.market.loan.bean.Result;
 import com.market.loan.constant.Constants;
 import com.market.loan.constant.Status;
 import com.market.loan.constant.Toasts;
+import com.market.loan.core.ConfigCache;
+import com.market.loan.http.HttpRequest;
 import com.market.loan.model.LoginViewModel;
 
 import java.util.Objects;
@@ -62,11 +64,11 @@ public class LoginActivity extends NoBarActivity {
             @Override
             public void onChanged(Result<LoginResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
+                    ConfigCache.token = result.getData().getToken();
                     SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
                     SharedPreferences.Editor edit = profile.edit();
-                    edit.putString("token", result.getData().getToken());
+                    edit.putString("token", ConfigCache.token);
                     edit.apply();
-
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
