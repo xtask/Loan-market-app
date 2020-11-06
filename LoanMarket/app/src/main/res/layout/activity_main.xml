@@ -65,6 +65,7 @@
                     tools:listitem="@layout/activity_main_list_1" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/marqueeList"
                     android:layout_width="wrap_content"
                     android:layout_height="188dp"
                     android:layout_gravity="center"

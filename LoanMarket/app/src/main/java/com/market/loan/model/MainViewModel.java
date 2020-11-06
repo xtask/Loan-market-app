@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.market.loan.bean.ConfigResult;
+import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
@@ -15,6 +15,7 @@ import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.RequestBody;
@@ -36,7 +37,17 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public void request() {
+    private MutableLiveData<Result<List<MarqueeResult>>> marqueeResult;
+
+    public LiveData<Result<List<MarqueeResult>>> getMarqueeResult() {
+        if (marqueeResult == null) {
+            marqueeResult = new MutableLiveData<>();
+        }
+        return marqueeResult;
+    }
+
+
+    public void getProduct() {
         Call call = new HttpRequest().get(Apis.PRODUCT_URL, RequestBody.create(HttpRequest.JSON, ""));
         call.enqueue(new CallbackAdapter() {
             @Override
@@ -57,6 +68,32 @@ public class MainViewModel extends ViewModel {
                     result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() {});
                 }
                 MainViewModel.this.productResult.postValue(result);
+            }
+        });
+    }
+
+
+    public void getMarquee() {
+        Call call = new HttpRequest().get(Apis.MARQUEE_URL, RequestBody.create(HttpRequest.JSON, ""));
+        call.enqueue(new CallbackAdapter() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                super.onFailure(call, e);
+                Result<List<MarqueeResult>> result = new Result<>("Network request failed.");
+                MainViewModel.this.marqueeResult.postValue(result);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                assert response.body() != null;
+                Result<List<MarqueeResult>> result;
+                if (response.code() != Status.HTTP_SUCCESS_CODE) {
+                    result = new Result<>(response.code() + "", response.message());
+                } else {
+                    String resultBody = response.body().string();
+                    result = JSON.parseObject(resultBody, new TypeReference<Result<List<MarqueeResult>>>() {});
+                }
+                MainViewModel.this.marqueeResult.postValue(result);
             }
         });
     }

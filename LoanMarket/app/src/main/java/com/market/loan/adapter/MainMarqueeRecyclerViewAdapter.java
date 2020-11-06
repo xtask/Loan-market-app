@@ -1,6 +1,5 @@
 package com.market.loan.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +10,16 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.market.loan.R;
-import com.market.loan.bean.Limit;
-import com.market.loan.tools.AmountFormat;
+import com.market.loan.bean.MarqueeResult;
 
 import java.util.List;
 
-public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRecyclerViewAdapter.ViewHolder> {
+public class MainMarqueeRecyclerViewAdapter extends RecyclerView.Adapter<MainMarqueeRecyclerViewAdapter.ViewHolder> {
 
-    List<Limit> values;
+    List<MarqueeResult> values;
     Context content;
 
-    public MainLoanRecyclerViewAdapter(Context context, List<Limit> limits) {
+    public MainMarqueeRecyclerViewAdapter(Context context, List<MarqueeResult> limits) {
         this.values = limits;
         this.content = context;
     }
@@ -29,14 +27,15 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(content).inflate(R.layout.activity_main_list_1, parent, false);
+        View view = LayoutInflater.from(content).inflate(R.layout.activity_main_list_2, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Limit limit = values.get(position);
-        holder.amountText.setText(AmountFormat.format(limit.getAmount()));
+        MarqueeResult marqueeResult = values.get(position);
+        holder.phoneText.setText(marqueeResult.getMobile());
+        holder.text.setText(marqueeResult.getText());
     }
 
     @Override
@@ -45,11 +44,13 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatTextView amountText;
+        AppCompatTextView phoneText;
+        AppCompatTextView text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            amountText = itemView.findViewById(R.id.loanAmount);
+            phoneText = itemView.findViewById(R.id.marqueePhone);
+            text = itemView.findViewById(R.id.marqueeText);
         }
     }
 }

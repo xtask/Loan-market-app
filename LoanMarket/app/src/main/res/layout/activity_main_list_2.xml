@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_marginBottom="16dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.ContentFrameLayout
         android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/marqueePhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -52,6 +54,7 @@
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/marqueeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"

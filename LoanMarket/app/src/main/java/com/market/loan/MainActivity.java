@@ -18,7 +18,9 @@ import com.market.loan.activity.PayActivity;
 import com.market.loan.activity.PayEndActivity;
 import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.adapter.MainLoanRecyclerViewAdapter;
+import com.market.loan.adapter.MainMarqueeRecyclerViewAdapter;
 import com.market.loan.bean.Limit;
+import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
 import com.market.loan.bean.enums.Certification;
@@ -32,6 +34,9 @@ public class MainActivity extends NoBarActivity {
 
     private MainViewModel mainViewModel;
 
+    String phase;
+    String certification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
@@ -42,22 +47,18 @@ public class MainActivity extends NoBarActivity {
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainViewModel.request();
+                selectorActivity();
             }
         });
-
 
         mainViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ProductResult productResult = result.getData();
-                    String phase = productResult.getPhase();
-                    String certification = productResult.getCertification();
-                    selectorActivity(phase, certification);
+                    phase = productResult.getPhase();
+                    certification = productResult.getCertification();
                     loadLoan(result.getData().getLimits());
-
-
                 } else {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -70,44 +71,62 @@ public class MainActivity extends NoBarActivity {
                 loanListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
                 MainLoanRecyclerViewAdapter adapter = new MainLoanRecyclerViewAdapter(MainActivity.this, limits);
                 loanListView.setAdapter(adapter);
-                adapter.notifyItemRangeRemoved(0, limits.size());
             }
 
+        });
 
-            private void selectorActivity(String phase, String certification) {
-                Class<?> activityClass = null;
-                if (Phase.UNAUTHORIZED.toString().equals(phase)) {
-                    if (Certification.BASE_INFO.toString().equals(certification)) {
-                        activityClass = BaseInfoActivity.class;
-                    } else if (Certification.WORK_INFO.toString().equals(certification)) {
-                        // todo
-                    } else if (Certification.BANK_INFO.toString().equals(certification)) {
-                        // todo
-                    }
-                } else if (Phase.IN_REVIEW.toString().equals(phase)) {
-                    activityClass = ReviewingActivity.class;
-                } else if (Phase.PASS_REVIEW.toString().equals(phase)) {
-                    SharedPreferences profile = getSharedPreferences("pay_profile", MODE_PRIVATE);
-                    final String FINISH_KEY = "approved_finish";
-                    boolean approvedFinish = profile.getBoolean(FINISH_KEY, false);
-                    if (approvedFinish) {
-                        activityClass = PayActivity.class;
-                    } else {
-                        activityClass = ApprovedActivity.class;
-                        SharedPreferences.Editor edit = profile.edit();
-                        edit.putBoolean(FINISH_KEY, true);
-                        edit.apply();
-                    }
-                } else if (Phase.PAYMENT.toString().equals(phase)) {
-                    activityClass = PayEndActivity.class;
+        mainViewModel.getMarqueeResult().observe(this, new Observer<Result<List<MarqueeResult>>>() {
+            @Override
+            public void onChanged(Result<List<MarqueeResult>> result) {
+                if (result.getStatus() == Status.SUCCESS_CODE) {
+                    loadMarquee(result.getData());
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
-                startActivity(intent);
-                if (Phase.PAYMENT.toString().equals(phase)) {
-                    finish();
-                }
+            }
+
+            private void loadMarquee(List<MarqueeResult> marqueeResults) {
+                RecyclerView marqueeListView = findViewById(R.id.marqueeList);
+                marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults);
+                marqueeListView.setAdapter(adapter);
             }
         });
-        mainViewModel.request();
+        mainViewModel.getProduct();
+        mainViewModel.getMarquee();
+    }
+
+
+
+    private void selectorActivity() {
+        Class<?> activityClass = null;
+        if (Phase.UNAUTHORIZED.toString().equals(phase)) {
+            if (Certification.BASE_INFO.toString().equals(certification)) {
+                activityClass = BaseInfoActivity.class;
+            } else if (Certification.WORK_INFO.toString().equals(certification)) {
+                // todo
+            } else if (Certification.BANK_INFO.toString().equals(certification)) {
+                // todo
+            }
+        } else if (Phase.IN_REVIEW.toString().equals(phase)) {
+            activityClass = ReviewingActivity.class;
+        } else if (Phase.PASS_REVIEW.toString().equals(phase)) {
+            SharedPreferences profile = getSharedPreferences("pay_profile", MODE_PRIVATE);
+            final String FINISH_KEY = "approved_finish";
+            boolean approvedFinish = profile.getBoolean(FINISH_KEY, false);
+            if (approvedFinish) {
+                activityClass = PayActivity.class;
+            } else {
+                activityClass = ApprovedActivity.class;
+                SharedPreferences.Editor edit = profile.edit();
+                edit.putBoolean(FINISH_KEY, true);
+                edit.apply();
+            }
+        } else if (Phase.PAYMENT.toString().equals(phase)) {
+            activityClass = PayEndActivity.class;
+        }
+        Intent intent = new Intent(getApplicationContext(), activityClass);
+        startActivity(intent);
+        if (Phase.PAYMENT.toString().equals(phase)) {
+            finish();
+        }
     }
 }
