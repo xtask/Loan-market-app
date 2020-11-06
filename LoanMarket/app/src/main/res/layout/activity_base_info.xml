@@ -120,6 +120,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_vertical"
                     android:hint="Marital"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName"
                     android:paddingStart="25dp"
                     android:paddingEnd="16dp"
@@ -137,6 +138,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_vertical"
                     android:hint="Education"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName"
                     android:paddingStart="25dp"
                     android:paddingEnd="16dp"
@@ -150,7 +152,6 @@
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
                     android:background="@mipmap/edit_text"
-                    android:drawableRight="@mipmap/edit_right"
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_vertical"
                     android:hint="E-mail"
@@ -178,6 +179,7 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/baseNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
