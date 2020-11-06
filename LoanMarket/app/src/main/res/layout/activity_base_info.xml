@@ -60,6 +60,7 @@
                     android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseFullName"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
@@ -74,6 +75,7 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
@@ -82,6 +84,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_vertical"
                     android:hint="Birthday"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName"
                     android:paddingStart="25dp"
                     android:paddingEnd="16dp"
@@ -90,6 +93,7 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseGender"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
@@ -98,6 +102,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_vertical"
                     android:hint="Gender"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName"
                     android:paddingStart="25dp"
                     android:paddingEnd="16dp"
@@ -106,6 +111,7 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseMarital"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
@@ -122,6 +128,7 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseEducation"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
@@ -138,6 +145,7 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/baseMail"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="15dp"
