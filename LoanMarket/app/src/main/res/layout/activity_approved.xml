@@ -94,8 +94,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
@@ -106,7 +106,9 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/approvedText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -120,48 +122,33 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
-            android:background="@mipmap/approved_people"
+            android:layout_marginBottom="130dp"
+            android:layout_gravity="center"
             android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/marqueeList"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="39dp"
-                android:fontFamily="@font/montserrat"
-                android:text="982****261"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                tools:ignore="MissingConstraints" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="197.37dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="become a member and just borrowed ₹33000"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/activity_approved_list" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -178,4 +165,18 @@
         </androidx.appcompat.widget.AppCompatImageButton>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/back_page_white" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.fastjson.JSON;
+import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.LoginActivity;
+import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Status;
@@ -75,7 +77,8 @@ public class StartActivity extends NoBarActivity {
         if (token == null) {
             activityClass = LoginActivity.class;
         } else {
-            activityClass = MainActivity.class;
+            // todo Main
+            activityClass = ReviewingActivity.class;
         }
         Intent intent = new Intent(getApplicationContext(), activityClass);
         startActivity(intent);

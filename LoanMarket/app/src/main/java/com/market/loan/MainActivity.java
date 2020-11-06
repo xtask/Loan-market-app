@@ -88,7 +88,7 @@ public class MainActivity extends NoBarActivity {
             private void loadMarquee(List<MarqueeResult> marqueeResults) {
                 RecyclerView marqueeListView = findViewById(R.id.marqueeList);
                 marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults);
+                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults,R.layout.activity_main_list_2);
                 marqueeListView.setAdapter(adapter);
             }
         });
