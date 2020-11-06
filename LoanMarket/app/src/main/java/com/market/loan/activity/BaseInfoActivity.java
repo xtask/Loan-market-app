@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -69,7 +70,7 @@ public class BaseInfoActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 ConfigData data = genderDicts.get(which);
                 gender.setText(data.getName());
-                baseRequest.setGender(data.getId());
+                baseRequest.setGender(data.getValue());
                 dialog.cancel();
             }
         };
@@ -79,7 +80,7 @@ public class BaseInfoActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 ConfigData data = educationDicts.get(which);
                 education.setText(data.getName());
-                baseRequest.setEducation(data.getId());
+                baseRequest.setEducation(data.getValue());
                 dialog.cancel();
             }
         };
@@ -89,7 +90,7 @@ public class BaseInfoActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 ConfigData data = maritalDicts.get(which);
                 marital.setText(data.getName());
-                baseRequest.setMarital(data.getId());
+                baseRequest.setMarital(data.getValue());
                 dialog.cancel();
             }
         };
@@ -148,10 +149,12 @@ public class BaseInfoActivity extends AppCompatActivity {
                                 Result<String> result = new Result<>("Network request failed.");
                             }
                             @Override
-                            public void onResponse(Call call, Response response) throws IOException {
+                            public void onResponse(Call call, Response response) {
                                 assert response.body() != null;
                                 if (response.isSuccessful()){
-
+                                    Intent intent = new Intent(getApplicationContext(), WorkInfoActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }
                         });

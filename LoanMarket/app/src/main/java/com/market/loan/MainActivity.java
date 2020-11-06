@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.market.loan.activity.ApprovedActivity;
+import com.market.loan.activity.BankInfoActivity;
 import com.market.loan.activity.BaseInfoActivity;
 import com.market.loan.activity.LoginActivity;
 import com.market.loan.activity.PayActivity;
 import com.market.loan.activity.PayEndActivity;
 import com.market.loan.activity.ReviewingActivity;
+import com.market.loan.activity.WorkInfoActivity;
 import com.market.loan.adapter.MainLoanRecyclerViewAdapter;
 import com.market.loan.adapter.MainMarqueeRecyclerViewAdapter;
 import com.market.loan.bean.Limit;
@@ -102,9 +104,9 @@ public class MainActivity extends NoBarActivity {
             if (Certification.BASE_INFO.toString().equals(certification)) {
                 activityClass = BaseInfoActivity.class;
             } else if (Certification.WORK_INFO.toString().equals(certification)) {
-                // todo
+                activityClass = WorkInfoActivity.class;
             } else if (Certification.BANK_INFO.toString().equals(certification)) {
-                // todo
+                activityClass = BankInfoActivity.class;
             }
         } else if (Phase.IN_REVIEW.toString().equals(phase)) {
             activityClass = ReviewingActivity.class;

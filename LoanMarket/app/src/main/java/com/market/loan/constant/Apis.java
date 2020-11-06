@@ -10,5 +10,7 @@ public final class Apis {
     public static final String SMS_CODE_URL = "/v3/public/index.php/user/sms";
     public static final String PRODUCT_URL = "/v3/public/index.php/product";
     public static final String MARQUEE_URL = "/v3/public/index.php/marquee";
-    public static final String BASE_SAVE_URL = "/v3/public/index.php/marquee";
+    public static final String BASE_SAVE_URL = "/v3/public/index.php/profile/update_baseinfo";
+    public static final String WORK_SAVE_URL = "/v3/public/index.php/profile/update_workinfo";
+    public static final String BANK_SAVE_URL = "/v3/public/index.php/profile/update_bankinfo";
 }
