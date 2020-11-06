@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.market.loan.R;
 
-public class AuthActivity extends AppCompatActivity {
+public class BaseInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.activity_base_info);
     }
 }

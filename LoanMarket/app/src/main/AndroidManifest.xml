@@ -19,7 +19,7 @@
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.ApprovedActivity" />
         <activity android:name=".activity.ReviewingActivity" />
-        <activity android:name=".activity.AuthActivity" />
+        <activity android:name=".activity.BaseInfoActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity
