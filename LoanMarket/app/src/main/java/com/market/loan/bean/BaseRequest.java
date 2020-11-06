@@ -57,20 +57,20 @@ public class BaseRequest {
     }
 
     public String checked() {
+        if (name == null || name.equals("")) {
+            return "Name not be empty";
+        }
         if (gender == null || gender.equals("")) {
             return "Gender not be empty";
         }
         if (marital == null || marital.equals("")) {
-            return "Gender not be empty";
+            return "Marital not be empty";
         }
         if (education == null || education.equals("")) {
             return "Education not be empty";
         }
         if (email == null || email.equals("")) {
             return "Email not be empty";
-        }
-        if (name == null || name.equals("")) {
-            return "Name not be empty";
         }
         if (birthday == null || birthday.equals("")) {
             return "Birthday not be empty";

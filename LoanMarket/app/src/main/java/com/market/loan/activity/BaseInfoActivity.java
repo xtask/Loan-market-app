@@ -3,6 +3,7 @@ package com.market.loan.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -14,15 +15,28 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.market.loan.R;
 import com.market.loan.adapter.DialogItemAdapter;
 import com.market.loan.bean.BaseRequest;
 import com.market.loan.bean.ConfigData;
 import com.market.loan.bean.ConfigResult;
+import com.market.loan.bean.LoginResult;
+import com.market.loan.bean.Result;
+import com.market.loan.constant.Apis;
+import com.market.loan.http.HttpRequest;
+import com.market.loan.http.adapter.CallbackAdapter;
+import com.market.loan.model.LoginViewModel;
 import com.market.loan.tools.DictsFilter;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class BaseInfoActivity extends AppCompatActivity {
 
@@ -45,7 +59,9 @@ public class BaseInfoActivity extends AppCompatActivity {
         final AppCompatEditText gender = findViewById(R.id.baseGender);
         final AppCompatEditText education = findViewById(R.id.baseEducation);
         final AppCompatEditText marital = findViewById(R.id.baseMarital);
-        final AppCompatEditText baseNext = findViewById(R.id.baseNext);
+        final AppCompatEditText baseName = findViewById(R.id.baseFullName);
+        final AppCompatEditText baseMail = findViewById(R.id.baseMail);
+        final AppCompatImageButton baseNext = findViewById(R.id.baseNext);
 
         final BaseRequest baseRequest = new BaseRequest();
         final DialogInterface.OnClickListener genderClickListener = new DialogInterface.OnClickListener() {
@@ -91,7 +107,7 @@ public class BaseInfoActivity extends AppCompatActivity {
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             String birthdayValue = year + "-" + month + "-" + dayOfMonth;
                             birthday.setText(birthdayValue);
-                            baseRequest.setMarital(birthdayValue);
+                            baseRequest.setBirthday(birthdayValue);
                         }
                     };
                     DatePickerDialog dialog = new DatePickerDialog(
@@ -118,13 +134,27 @@ public class BaseInfoActivity extends AppCompatActivity {
                             .setSingleChoiceItems(new DialogItemAdapter(BaseInfoActivity.this, maritalDicts, R.layout.list_view_item), -1, maritalClickListener);
                     builder.create().show();
                 } else if (id == R.id.baseNext) {
-                    baseRequest.setName("");
-                    baseRequest.setEmail("");
+                    baseRequest.setName(Objects.requireNonNull(baseName.getText()).toString());
+                    baseRequest.setEmail(Objects.requireNonNull(baseMail.getText()).toString());
                     String result = baseRequest.checked();
                     if (result != null) {
                         Toast.makeText(BaseInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
+                        Call call = new HttpRequest().post(Apis.BASE_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(baseRequest)));
+                        call.enqueue(new CallbackAdapter() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                super.onFailure(call, e);
+                                Result<String> result = new Result<>("Network request failed.");
+                            }
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                assert response.body() != null;
+                                if (response.isSuccessful()){
 
+                                }
+                            }
+                        });
                     }
                 }
             }

@@ -10,4 +10,5 @@ public final class Apis {
     public static final String SMS_CODE_URL = "/v3/public/index.php/user/sms";
     public static final String PRODUCT_URL = "/v3/public/index.php/product";
     public static final String MARQUEE_URL = "/v3/public/index.php/marquee";
+    public static final String BASE_SAVE_URL = "/v3/public/index.php/marquee";
 }
