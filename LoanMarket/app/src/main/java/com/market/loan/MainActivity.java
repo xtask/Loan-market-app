@@ -21,6 +21,7 @@ import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.activity.WorkInfoActivity;
 import com.market.loan.adapter.MainLoanRecyclerViewAdapter;
 import com.market.loan.adapter.MainMarqueeRecyclerViewAdapter;
+import com.market.loan.bean.ConfigData;
 import com.market.loan.bean.Limit;
 import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
@@ -28,6 +29,7 @@ import com.market.loan.bean.Result;
 import com.market.loan.bean.enums.Certification;
 import com.market.loan.bean.enums.Phase;
 import com.market.loan.constant.Status;
+import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MainViewModel;
 
 import java.util.List;
@@ -60,7 +62,10 @@ public class MainActivity extends NoBarActivity {
                     ProductResult productResult = result.getData();
                     phase = productResult.getPhase();
                     certification = productResult.getCertification();
-                    loadLoan(result.getData().getLimits());
+                    List<Limit> limits = result.getData().getLimits();
+                    Limit limit = limits.get(limits.size() - 1);
+                    ConfigCache.amount = limit.getAmount();
+                    loadLoan(limits);
                 } else {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -88,14 +93,13 @@ public class MainActivity extends NoBarActivity {
             private void loadMarquee(List<MarqueeResult> marqueeResults) {
                 RecyclerView marqueeListView = findViewById(R.id.marqueeList);
                 marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults,R.layout.activity_main_list_2);
+                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults, R.layout.activity_main_list_2);
                 marqueeListView.setAdapter(adapter);
             }
         });
         mainViewModel.getProduct();
         mainViewModel.getMarquee();
     }
-
 
 
     private void selectorActivity() {
