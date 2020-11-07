@@ -48,11 +48,11 @@ public class MyProfileViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                 Result<UserResult> result;
-                if (response.code() != Status.HTTP_SUCCESS_CODE) {
-                    result = new Result<>(response.code() + "", response.message());
-                } else {
+                if (response.isSuccessful()) {
                     String resultBody = response.body().string();
                     result = JSON.parseObject(resultBody, new TypeReference<Result<UserResult>>() {});
+                } else {
+                    result = new Result<>(response.code() + "", response.message());
                 }
                 MyProfileViewModel.this.userResult.postValue(result);
             }

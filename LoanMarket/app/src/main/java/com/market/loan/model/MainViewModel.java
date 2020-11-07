@@ -61,11 +61,11 @@ public class MainViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                 Result<ProductResult> result;
-                if (response.code() != Status.HTTP_SUCCESS_CODE) {
-                    result = new Result<>(response.code() + "", response.message());
-                } else {
+                if (response.isSuccessful()) {
                     String resultBody = response.body().string();
                     result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() {});
+                } else {
+                    result = new Result<>(response.code() + "", response.message());
                 }
                 MainViewModel.this.productResult.postValue(result);
             }
@@ -87,11 +87,11 @@ public class MainViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                 Result<List<MarqueeResult>> result;
-                if (response.code() != Status.HTTP_SUCCESS_CODE) {
-                    result = new Result<>(response.code() + "", response.message());
-                } else {
+                if (response.isSuccessful()) {
                     String resultBody = response.body().string();
                     result = JSON.parseObject(resultBody, new TypeReference<Result<List<MarqueeResult>>>() {});
+                } else {
+                    result = new Result<>(response.code() + "", response.message());
                 }
                 MainViewModel.this.marqueeResult.postValue(result);
             }

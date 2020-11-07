@@ -68,7 +68,7 @@ public class PayEndActivity extends AppCompatActivity {
             public void onChanged(Result<ProductResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     vips = result.getData().getViplist();
-                    List<Vip> vipsTemp = null;
+                    List<Vip> vipsTemp = vips;
                     if (vips.size() > 4) {
                         vipsTemp = vips.subList(0, 4);
                     }

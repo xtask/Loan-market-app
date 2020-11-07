@@ -51,11 +51,11 @@ public class ApprovedViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                 Result<List<MarqueeResult>> result;
-                if (response.code() != Status.HTTP_SUCCESS_CODE) {
-                    result = new Result<>(response.code() + "", response.message());
-                } else {
+                if (response.isSuccessful()) {
                     String resultBody = response.body().string();
                     result = JSON.parseObject(resultBody, new TypeReference<Result<List<MarqueeResult>>>() {});
+                } else {
+                    result = new Result<>(response.code() + "", response.message());
                 }
                 ApprovedViewModel.this.marqueeResult.postValue(result);
             }

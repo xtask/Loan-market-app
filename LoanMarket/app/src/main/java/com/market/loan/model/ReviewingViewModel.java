@@ -47,8 +47,13 @@ public class ReviewingViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
-                String resultBody = response.body().string();
-                Result<ProductResult> result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() {});
+                Result<ProductResult> result;
+                if (response.isSuccessful()) {
+                    String resultBody = response.body().string();
+                    result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() {});
+                } else {
+                    result = new Result<>(response.code() + "", "Network request failed.");
+                }
                 ReviewingViewModel.this.productResult.postValue(result);
             }
         });

@@ -9,6 +9,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
+import com.market.loan.constant.Status;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 
@@ -46,8 +47,13 @@ public class PayViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
-                String resultBody = response.body().string();
-                Result<ProductResult> result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() {});
+                Result<ProductResult> result;
+                if (response.isSuccessful()) {
+                    String resultBody = response.body().string();
+                    result = JSON.parseObject(resultBody, new TypeReference<Result<ProductResult>>() { });
+                } else {
+                    result = new Result<>(response.code() + "", "Network request failed.");
+                }
                 PayViewModel.this.productResult.postValue(result);
             }
         });
