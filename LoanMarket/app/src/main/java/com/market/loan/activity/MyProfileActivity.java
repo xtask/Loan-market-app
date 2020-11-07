@@ -2,6 +2,7 @@ package com.market.loan.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -41,6 +42,13 @@ public class MyProfileActivity extends AppCompatActivity {
         final AppCompatEditText profileBaseInfo = findViewById(R.id.profileBaseInfo);
         final AppCompatEditText profileWorkInfo = findViewById(R.id.profileWorkInfo);
         final AppCompatEditText profileBankInfo = findViewById(R.id.profileBankInfo);
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
 

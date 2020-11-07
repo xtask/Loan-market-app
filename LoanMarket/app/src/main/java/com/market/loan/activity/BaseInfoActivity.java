@@ -64,6 +64,14 @@ public class BaseInfoActivity extends AppCompatActivity {
         final AppCompatEditText baseMail = findViewById(R.id.baseMail);
         final AppCompatImageButton baseNext = findViewById(R.id.baseNext);
 
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         final BaseRequest baseRequest = new BaseRequest();
         final DialogInterface.OnClickListener genderClickListener = new DialogInterface.OnClickListener() {
             @Override

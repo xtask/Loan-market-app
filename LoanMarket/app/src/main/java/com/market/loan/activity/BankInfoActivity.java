@@ -34,6 +34,13 @@ public class BankInfoActivity extends AppCompatActivity {
         final AppCompatEditText bankName = findViewById(R.id.bankBankName);
         final AppCompatEditText accountNo = findViewById(R.id.bankAccountNo);
         final AppCompatImageButton bankNext = findViewById(R.id.bankNext);
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         final BankRequest bankRequest = new BankRequest();
 

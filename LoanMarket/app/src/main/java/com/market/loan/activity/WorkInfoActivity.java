@@ -59,6 +59,14 @@ public class WorkInfoActivity extends AppCompatActivity {
         final AppCompatEditText income = findViewById(R.id.workIncome);
         final AppCompatImageButton baseNext = findViewById(R.id.workNext);
 
+
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         final WorkRequest workRequest = new WorkRequest();
 
 

@@ -64,6 +64,15 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
         final AppCompatEditText myProfileMail = findViewById(R.id.myProfileMail);
         final AppCompatImageButton myProfileSave = findViewById(R.id.myProfileSave);
 
+
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         UserResult userResult = ConfigCache.userResult;
         final BaseRequest myProfileRequest = new BaseRequest(userResult);
 

@@ -57,6 +57,14 @@ public class ProfileWorkInfoActivity extends AppCompatActivity {
         final AppCompatImageButton myProfileWorkSave = findViewById(R.id.myProfileWorkSave);
 
 
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         UserResult userResult = ConfigCache.userResult;
         final WorkRequest workRequest = new WorkRequest(ConfigCache.userResult);
         myProfileEmployment.setText(userResult.getEmploymentType());

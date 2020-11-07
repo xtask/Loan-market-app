@@ -40,7 +40,13 @@ public class FeedbackActivity extends AppCompatActivity {
         feedBackMail.setText(mail);
         final AppCompatEditText messageBox = findViewById(R.id.messageBox);
         AppCompatImageButton sendMessage = findViewById(R.id.sendMessage);
-
+        final AppCompatImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
