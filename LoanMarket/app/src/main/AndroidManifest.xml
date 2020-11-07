@@ -29,8 +29,8 @@
         <activity android:name=".activity.ApprovedActivity" />
         <activity android:name=".activity.ReviewingActivity" />
         <activity android:name=".activity.BaseInfoActivity" />
-        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activity.LoginActivity"/>
         <activity
             android:name=".StartActivity"
             android:theme="@style/RedTheme.NoActionBar.Start">

@@ -1,22 +1,16 @@
 package com.market.loan;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.fastjson.JSON;
-import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.LoginActivity;
-import com.market.loan.activity.MyPageActivity;
-import com.market.loan.activity.PayActivity;
-import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Status;

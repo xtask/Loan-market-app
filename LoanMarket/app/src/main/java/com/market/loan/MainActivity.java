@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,7 +37,7 @@ import com.market.loan.model.MainViewModel;
 
 import java.util.List;
 
-public class MainActivity extends NoBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
 
