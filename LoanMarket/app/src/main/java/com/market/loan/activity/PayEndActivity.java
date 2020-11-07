@@ -38,6 +38,30 @@ public class PayEndActivity extends AppCompatActivity {
 
         AppCompatImageButton moreLoan = findViewById(R.id.getMoreLoan);
 
+        AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
+        AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
+
+
+
+        View.OnClickListener bottomClick = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+                Class<?> activityClass = null;
+                if (id == R.id.moneyPackageBtn){
+                    activityClass = MainActivity.class;
+                }else if(id == R.id.selfInfoBtn){
+                    activityClass = MyPageActivity.class;
+                }
+                Intent intent = new Intent(getApplicationContext(), activityClass);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        };
+        moneyPackageBtn.setOnClickListener(bottomClick);
+        selfInfoBtn.setOnClickListener(bottomClick);
+
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override

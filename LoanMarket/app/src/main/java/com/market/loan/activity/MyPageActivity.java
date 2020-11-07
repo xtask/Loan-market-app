@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,6 +51,29 @@ public class MyPageActivity extends AppCompatActivity {
         final AppCompatButton myCustomer = findViewById(R.id.myCustomer);
         final AppCompatButton myAboutUs = findViewById(R.id.myAboutUs);
         final AppCompatButton myLogOut = findViewById(R.id.myLogOut);
+        AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
+        AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
+
+
+        View.OnClickListener bottomClick = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+                Class<?> activityClass = null;
+                if (id == R.id.moneyPackageBtn){
+                    activityClass = MainActivity.class;
+                }else if(id == R.id.selfInfoBtn){
+                    activityClass = MyPageActivity.class;
+                }
+                Intent intent = new Intent(getApplicationContext(), activityClass);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        };
+
+        moneyPackageBtn.setOnClickListener(bottomClick);
+        selfInfoBtn.setOnClickListener(bottomClick);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
 
@@ -63,9 +87,9 @@ public class MyPageActivity extends AppCompatActivity {
                 } else if (id == R.id.myFeedBack) {
                     activityClass = FeedbackActivity.class;
                 } else if (id == R.id.myCustomer) {
-
+                    return;
                 } else if (id == R.id.myAboutUs) {
-
+                    return;
                 } else {
                     if (id == R.id.myLogOut) {
                         new AlertDialog.Builder(MyPageActivity.this)

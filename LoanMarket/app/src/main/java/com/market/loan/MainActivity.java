@@ -15,6 +15,7 @@ import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.BankInfoActivity;
 import com.market.loan.activity.BaseInfoActivity;
 import com.market.loan.activity.LoginActivity;
+import com.market.loan.activity.MyPageActivity;
 import com.market.loan.activity.PayActivity;
 import com.market.loan.activity.PayEndActivity;
 import com.market.loan.activity.ReviewingActivity;
@@ -46,6 +47,30 @@ public class MainActivity extends NoBarActivity {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
+        AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
+
+
+
+        View.OnClickListener bottomClick = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+                Class<?> activityClass = null;
+                if (id == R.id.moneyPackageBtn){
+                    activityClass = MainActivity.class;
+                }else if(id == R.id.selfInfoBtn){
+                    activityClass = MyPageActivity.class;
+                }
+                Intent intent = new Intent(getApplicationContext(), activityClass);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        };
+        moneyPackageBtn.setOnClickListener(bottomClick);
+        selfInfoBtn.setOnClickListener(bottomClick);
 
         AppCompatImageButton moreLoanButton = findViewById(R.id.moreLoan);
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
