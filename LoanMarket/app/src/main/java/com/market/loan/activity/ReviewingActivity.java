@@ -78,6 +78,8 @@ public class ReviewingActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
+                }else{
+                    //todo
                 }
             }
         });

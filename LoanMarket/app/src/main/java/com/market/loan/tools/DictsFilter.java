@@ -26,4 +26,13 @@ public class DictsFilter {
         }
         return dictsByType;
     }
+
+    public String getValue(String type, String name) {
+        for (ConfigData dict : dicts) {
+            if (dict.getType().equals(type) && dict.getName().equals(name)) {
+                return dict.getValue();
+            }
+        }
+        return null;
+    }
 }

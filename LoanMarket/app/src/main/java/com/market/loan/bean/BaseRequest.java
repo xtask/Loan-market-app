@@ -8,6 +8,17 @@ public class BaseRequest {
     String name;
     String birthday;
 
+    public BaseRequest(){}
+
+    public BaseRequest(UserResult userResult) {
+        this.gender = userResult.gender;
+        this.marital = userResult.marital;
+        this.education = userResult.education;
+        this.email = userResult.email;
+        this.name = userResult.name;
+        this.birthday = userResult.birthday;
+    }
+
     public String getGender() {
         return gender;
     }

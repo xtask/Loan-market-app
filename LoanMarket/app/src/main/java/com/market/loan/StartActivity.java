@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.alibaba.fastjson.JSON;
 import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.LoginActivity;
+import com.market.loan.activity.MyPageActivity;
 import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
@@ -59,7 +60,7 @@ public class StartActivity extends NoBarActivity {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(1000);
                     startViewModel.request();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -78,7 +79,7 @@ public class StartActivity extends NoBarActivity {
             activityClass = LoginActivity.class;
         } else {
             // todo Main
-            activityClass = ReviewingActivity.class;
+            activityClass = MyPageActivity.class;
         }
         Intent intent = new Intent(getApplicationContext(), activityClass);
         startActivity(intent);

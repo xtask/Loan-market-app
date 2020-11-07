@@ -72,6 +72,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myProfile"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginTop="25dp"
@@ -89,6 +90,7 @@
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myFeedBack"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginTop="9dp"
@@ -106,6 +108,7 @@
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myCustomer"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginTop="9dp"
@@ -123,6 +126,7 @@
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myAboutUs"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginTop="9dp"
@@ -140,6 +144,7 @@
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myLogOut"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginTop="9dp"
