@@ -76,4 +76,10 @@ public class MyProfileActivity extends AppCompatActivity {
         profileWorkInfo.setOnClickListener(onClickListener);
         profileBankInfo.setOnClickListener(onClickListener);
     }
+
+    @Override
+    protected void onRestart() {
+        myProfileViewModel.request();
+        super.onRestart();
+    }
 }
