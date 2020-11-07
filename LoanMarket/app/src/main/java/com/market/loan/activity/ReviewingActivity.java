@@ -52,6 +52,7 @@ public class ReviewingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 reviewingViewModel.request();
+                Toast.makeText(ReviewingActivity.this, Toasts.WAIT_TIME, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,8 +78,6 @@ public class ReviewingActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                } else {
-                    Toast.makeText(ReviewingActivity.this, Toasts.WAIT_TIME, Toast.LENGTH_SHORT).show();
                 }
             }
         });

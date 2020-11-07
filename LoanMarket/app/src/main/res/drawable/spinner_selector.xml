@@ -9,9 +9,6 @@
         android:height="60dp"
         android:drawable="@mipmap/pay_detail_bg"
         android:state_pressed="false" />
-    <item
-        android:drawable="@mipmap/edit_right"
-        android:gravity="center_vertical|right"
-        android:right="16sp" />
+
 
 </layer-list>

@@ -62,7 +62,7 @@ public class ApprovedActivity extends AppCompatActivity {
             public void onChanged(Result<List<MarqueeResult>> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
-                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();

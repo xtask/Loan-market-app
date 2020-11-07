@@ -34,7 +34,7 @@ public class MyProfileActivity extends AppCompatActivity {
             public void onChanged(Result<UserResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ConfigCache.userResult = result.getData();
-                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
