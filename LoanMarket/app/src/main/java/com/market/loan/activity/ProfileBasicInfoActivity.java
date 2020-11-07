@@ -176,8 +176,6 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
                             public void onResponse(Call call, Response response) {
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
-                                    startActivity(intent);
                                     finish();
                                 }
                             }
