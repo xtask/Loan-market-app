@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.BankInfoActivity;
@@ -52,6 +53,14 @@ public class MainActivity extends NoBarActivity {
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
 
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mainViewModel.getProduct();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         View.OnClickListener bottomClick = new View.OnClickListener(){
             @Override
