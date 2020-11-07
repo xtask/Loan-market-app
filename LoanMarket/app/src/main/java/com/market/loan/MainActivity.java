@@ -76,7 +76,7 @@ public class MainActivity extends NoBarActivity {
             private void loadLoan(List<Limit> limits) {
                 RecyclerView loanListView = findViewById(R.id.loanList);
                 loanListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
-                MainLoanRecyclerViewAdapter adapter = new MainLoanRecyclerViewAdapter(MainActivity.this, limits);
+                MainLoanRecyclerViewAdapter adapter = new MainLoanRecyclerViewAdapter(MainActivity.this, limits, R.layout.activity_main_list_1);
                 loanListView.setAdapter(adapter);
             }
 

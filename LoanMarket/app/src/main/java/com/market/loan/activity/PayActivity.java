@@ -111,14 +111,15 @@ public class PayActivity extends AppCompatActivity {
                 durations = limit.getDurations();
                 seekBarMonths.setMax(durations.size() - 1);
                 if (seekBarMonths.getProgress() == 0) {
-                    payMonths.setText(durations.get(0).getDuration());
-                    amountOld.setText(durations.get(0).getMemberOriFee());
-                    amountNew.setText(durations.get(0).getMemberFee());
-                    loanTerm.setText(durations.get(0).getDuration());
-                    loanInterest.setText(durations.get(0).getInterest());
-                    monthlyPayment.setText(durations.get(0).getMonthlyPayment());
-                    monthlyPrincipal.setText(durations.get(0).getMonthlyPrincipal());
-                    monthlyInerest.setText(durations.get(0).getMonthlyInerest());
+                    Duration duration = durations.get(0);
+                    payMonths.setText(duration.getDuration());
+                    amountOld.setText(duration.getMemberOriFee());
+                    amountNew.setText(duration.getMemberFee());
+                    loanTerm.setText(duration.getDuration());
+                    loanInterest.setText(duration.getInterest());
+                    monthlyPayment.setText(duration.getMonthlyPayment());
+                    monthlyPrincipal.setText(duration.getMonthlyPrincipal());
+                    monthlyInerest.setText(duration.getMonthlyInerest());
                 } else {
                     seekBarMonths.setProgress(0);
                 }

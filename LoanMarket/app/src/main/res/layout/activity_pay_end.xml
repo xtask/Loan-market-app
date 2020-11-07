@@ -51,9 +51,11 @@
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
+                android:id="@+id/payEndLoanList"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 tools:listitem="@layout/activity_pay_list" />
@@ -109,6 +111,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/getMoreLoan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -79,8 +79,7 @@ public class StartActivity extends NoBarActivity {
         if (token == null) {
             activityClass = LoginActivity.class;
         } else {
-            // todo Main
-            activityClass = PayActivity.class;
+            activityClass = MainActivity.class;
         }
         Intent intent = new Intent(getApplicationContext(), activityClass);
         startActivity(intent);

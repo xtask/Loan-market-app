@@ -24,16 +24,18 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
 
     List<Limit> values;
     Context content;
+    int resourceId;
 
-    public MainLoanRecyclerViewAdapter(Context context, List<Limit> limits) {
+    public MainLoanRecyclerViewAdapter(Context context, List<Limit> limits, int resourceId) {
         this.values = limits;
         this.content = context;
+        this.resourceId = resourceId;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(content).inflate(R.layout.activity_main_list_1, parent, false);
+        View view = LayoutInflater.from(content).inflate(resourceId, parent, false);
         return new ViewHolder(view);
     }
 

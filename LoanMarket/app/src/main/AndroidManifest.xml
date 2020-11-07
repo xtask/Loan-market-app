@@ -16,7 +16,7 @@
         android:theme="@style/RedTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.ProfileBankInfoActivity"></activity>
+        <activity android:name=".activity.ProfileBankInfoActivity" />
         <activity android:name=".activity.ProfileWorkInfoActivity" />
         <activity android:name=".activity.ProfileBasicInfoActivity" />
         <activity android:name=".activity.BankInfoActivity" />
