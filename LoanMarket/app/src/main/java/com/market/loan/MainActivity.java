@@ -91,7 +91,7 @@ public class MainActivity extends NoBarActivity {
                     Limit limit = limits.get(limits.size() - 1);
                     ConfigCache.amount = limit.getAmount();
                     loadLoan(limits);
-                } else {
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -112,6 +112,10 @@ public class MainActivity extends NoBarActivity {
             public void onChanged(Result<List<MarqueeResult>> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
 

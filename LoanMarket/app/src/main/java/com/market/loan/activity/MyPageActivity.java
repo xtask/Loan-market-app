@@ -41,6 +41,10 @@ public class MyPageActivity extends AppCompatActivity {
                     ConfigCache.userResult = result.getData();
                     AppCompatTextView myPageMobile = findViewById(R.id.myPageMobile);
                     myPageMobile.setText(ConfigCache.userResult.getMobile());
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

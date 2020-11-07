@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -66,9 +67,7 @@ public class ReviewingActivity extends AppCompatActivity {
             @Override
             public void onChanged(Result<ProductResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
-
                     ProductResult resultData = result.getData();
-
                     if (Integer.parseInt(resultData.getPhase()) >= 2) {
                         timer.cancel();
                         List<Limit> limits = resultData.getLimits();
@@ -78,8 +77,8 @@ public class ReviewingActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }else{
-                    //todo
+                } else {
+                    Toast.makeText(ReviewingActivity.this, Toasts.WAIT_TIME, Toast.LENGTH_SHORT).show();
                 }
             }
         });

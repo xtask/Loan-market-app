@@ -89,6 +89,10 @@ public class PayActivity extends AppCompatActivity {
                     ProductResult data = result.getData();
                     limits = data.getLimits();
                     seekBarAmount.setMax(limits.size() - 1);
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -98,6 +102,10 @@ public class PayActivity extends AppCompatActivity {
             public void onChanged(Result<UserResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     bankCardNumber.setText(result.getData().getBankAccountNo());
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

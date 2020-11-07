@@ -73,7 +73,7 @@ public class PayEndActivity extends AppCompatActivity {
                         vipsTemp = vips.subList(0, 4);
                     }
                     loadLoan(vipsTemp);
-                } else {
+                } else if (result.getStatus() == Status.ACCESS_DENIED_CODE){
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
