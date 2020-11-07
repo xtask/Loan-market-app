@@ -27,10 +27,8 @@
 
 
     <style name="RedTheme.NoActionBar" parent="RedTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="RedTheme.NoActionBar.NoStatus" parent="RedTheme.NoActionBar">
