@@ -102,7 +102,7 @@ public class MainActivity extends NoBarActivity {
     }
 
 
-    private void selectorActivity() {
+    public void selectorActivity() {
         Class<?> activityClass = null;
         if (Phase.UNAUTHORIZED.toString().equals(phase)) {
             if (Certification.BASE_INFO.toString().equals(certification)) {

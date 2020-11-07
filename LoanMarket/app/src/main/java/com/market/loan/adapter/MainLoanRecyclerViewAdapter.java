@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.market.loan.MainActivity;
 import com.market.loan.R;
 import com.market.loan.bean.Duration;
 import com.market.loan.bean.Limit;
@@ -51,8 +52,8 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
         ) {
             @Override
             public void onClick(View v) {
-                // todo
-                Log.d(ContentValues.TAG, "销毁了:" + limit.toString());
+                MainActivity mainActivity = (MainActivity) content;
+                mainActivity.selectorActivity();
             }
         };
         holder.layout.setOnClickListener(onClickListener);
