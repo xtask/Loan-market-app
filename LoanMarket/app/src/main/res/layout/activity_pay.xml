@@ -129,6 +129,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/detailsMain"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginStart="20dp"
@@ -156,9 +157,11 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/goneViewBtnGone"
+                                android:background="@android:color/transparent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginTop="17dp"
                                 android:layout_marginEnd="20dp"
@@ -176,7 +179,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
-                    android:visibility="gone"
                     android:background="@mipmap/pay_detail_bg_all"
                     android:orientation="vertical">
 
@@ -199,13 +201,15 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/goneViewBtn"
+                                android:background="@android:color/transparent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginTop="17dp"
                                 android:layout_marginEnd="20dp"
-                                android:src="@mipmap/pay_detail_bg_default" />
+                                android:src="@mipmap/pay_detail_bg_show" />
                         </LinearLayout>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -214,6 +218,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:orientation="vertical">
+
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -227,13 +233,12 @@
                                 android:text="Loan term"
                                 android:textColor="#313131"
                                 android:textSize="14sp" />
-
                             <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/loanTerm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="23dp"
@@ -243,63 +248,171 @@
                                     android:text="12 months"
                                     android:textColor="#A4AAC8"
                                     android:textSize="14sp" />
-
                             </androidx.appcompat.widget.LinearLayoutCompat>
-
                         </androidx.appcompat.widget.LinearLayoutCompat>
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/montserrat"
-                            android:text="Loan Interest"
-                            android:textColor="#313131"
-                            android:textSize="14sp" />
 
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/montserrat"
-                            android:text="Monthly Payment"
-                            android:textColor="#313131"
-                            android:textSize="14sp" />
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="15dp"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Loan Interest"
+                                android:textColor="#313131"
+                                android:textSize="14sp" />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/loanInterest"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="23dp"
+                                    android:layout_marginTop="15dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:layout_gravity="end"
+                                    android:text="Same as above"
+                                    android:textColor="#A4AAC8"
+                                    android:textSize="14sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/montserrat"
-                            android:text="Monthly principal"
-                            android:textColor="#313131"
-                            android:textSize="14sp" />
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="15dp"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Monthly Payment"
+                                android:textColor="#313131"
+                                android:textSize="14sp" />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/monthlyPayment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="23dp"
+                                    android:layout_marginTop="15dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:layout_gravity="end"
+                                    android:text="Same as above"
+                                    android:textColor="#A4AAC8"
+                                    android:textSize="14sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/montserrat"
-                            android:text="Monthly inerest"
-                            android:textColor="#313131"
-                            android:textSize="14sp" />
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="15dp"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Monthly principal"
+                                android:textColor="#313131"
+                                android:textSize="14sp" />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/monthlyPrincipal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="23dp"
+                                    android:layout_marginTop="15dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:layout_gravity="end"
+                                    android:text="Same as above"
+                                    android:textColor="#A4AAC8"
+                                    android:textSize="14sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="23dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/montserrat"
-                            android:text="Bank Card Number"
-                            android:textColor="#313131"
-                            android:textSize="14sp" />
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="15dp"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Monthly inerest"
+                                android:textColor="#313131"
+                                android:textSize="14sp" />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/monthlyInerest"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="23dp"
+                                    android:layout_marginTop="15dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:layout_gravity="end"
+                                    android:text="Same as above"
+                                    android:textColor="#A4AAC8"
+                                    android:textSize="14sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="15dp"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Bank Card Number"
+                                android:textColor="#313131"
+                                android:textSize="14sp" />
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/bankCardNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="23dp"
+                                    android:layout_marginTop="15dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:layout_gravity="end"
+                                    android:text="Same as above"
+                                    android:textColor="#A4AAC8"
+                                    android:textSize="14sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -347,18 +460,33 @@
                                 android:gravity="center">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="₹"
+                                    android:textColor="#AAAAAA"
+                                    android:textSize="16sp" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/amountOld"
                                     android:layout_width="39dp"
                                     android:layout_height="23dp"
-                                    android:text="₹899"
+                                    android:text="899"
                                     android:textColor="#AAAAAA"
                                     android:textSize="16sp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="50dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="29dp"
                                     android:layout_marginStart="8dp"
+                                    android:text="₹"
+                                    android:textColor="#ffffffff"
+                                    android:textSize="21sp" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/amountNew"
+                                    android:layout_width="50dp"
+                                    android:layout_height="29dp"
                                     android:layout_marginEnd="13dp"
-                                    android:text="₹299"
+                                    android:text="299"
                                     android:textColor="#ffffffff"
                                     android:textSize="21sp" />
                             </androidx.appcompat.widget.LinearLayoutCompat>
