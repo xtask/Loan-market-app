@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.LoginActivity;
 import com.market.loan.activity.MyPageActivity;
+import com.market.loan.activity.PayActivity;
 import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
@@ -79,7 +80,7 @@ public class StartActivity extends NoBarActivity {
             activityClass = LoginActivity.class;
         } else {
             // todo Main
-            activityClass = MyPageActivity.class;
+            activityClass = PayActivity.class;
         }
         Intent intent = new Intent(getApplicationContext(), activityClass);
         startActivity(intent);

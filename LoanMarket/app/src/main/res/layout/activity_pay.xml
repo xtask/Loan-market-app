@@ -55,27 +55,38 @@
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
-
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="23dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:lineHeight="30dp"
-                    android:text="₹80,000"
-                    android:textColor="#FFFFFF"
-                    android:textSize="34sp" />
+                    android:layout_marginEnd="32dp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:text="₹"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/payAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:lineHeight="30dp"
+                        android:text="80,000"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seekBarAmount"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:max="100"
                     android:min="0"
-                    android:progress="50"
                     android:progressDrawable="@drawable/select_item_selector"
                     android:scrollbars="vertical"
                     android:thumb="@mipmap/read_button" />
@@ -88,35 +99,36 @@
                     android:layout_marginEnd="32dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:lineHeight="30dp"
+                    android:min="0"
                     android:text="Term (Months)"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/payMonths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="23dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat"
                     android:lineHeight="30dp"
                     android:text="6 Months"
                     android:textColor="#FFFFFF"
                     android:textSize="34sp" />
 
                 <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seekBarMonths"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:max="100"
-                    android:min="0"
-                    android:progress="50"
                     android:progressDrawable="@drawable/select_item_selector"
                     android:scrollbars="vertical"
                     android:thumb="@mipmap/read_button" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/detailsMain"
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginStart="20dp"
@@ -158,11 +170,13 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/detailsList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
+                    android:visibility="gone"
                     android:background="@mipmap/pay_detail_bg_all"
                     android:orientation="vertical">
 
