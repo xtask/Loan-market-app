@@ -70,6 +70,7 @@ public class ProfileBankInfoActivity extends AppCompatActivity {
                                 if (response.isSuccessful()) {
                                     Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             }
                         });

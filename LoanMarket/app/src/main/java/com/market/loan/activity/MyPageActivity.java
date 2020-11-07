@@ -1,16 +1,21 @@
 package com.market.loan.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.market.loan.MainActivity;
 import com.market.loan.R;
+import com.market.loan.StartActivity;
 import com.market.loan.bean.Result;
 import com.market.loan.bean.UserResult;
 import com.market.loan.constant.Status;
@@ -56,13 +61,37 @@ public class MyPageActivity extends AppCompatActivity {
                 if (id == R.id.myProfile) {
                     activityClass = MyProfileActivity.class;
                 } else if (id == R.id.myFeedBack) {
-
+                    activityClass = FeedbackActivity.class;
                 } else if (id == R.id.myCustomer) {
 
                 } else if (id == R.id.myAboutUs) {
 
-                } else if (id == R.id.myLogOut) {
-
+                } else {
+                    if (id == R.id.myLogOut) {
+                        new AlertDialog.Builder(MyPageActivity.this)
+                                .setTitle("Confirm logout?")
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ConfigCache.token = "";
+                                        SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+                                        SharedPreferences.Editor edit = profile.edit();
+                                        edit.putString("token", "");
+                                        edit.apply();
+                                        dialog.cancel();
+                                        activityClass = MainActivity.class;
+                                        Intent intent = new Intent(getApplicationContext(), activityClass);
+                                        startActivity(intent);
+                                    }
+                                }).show();
+                    }
+                    return;
                 }
                 Intent intent = new Intent(getApplicationContext(), activityClass);
                 startActivity(intent);
@@ -70,8 +99,6 @@ public class MyPageActivity extends AppCompatActivity {
         };
         myProfile.setOnClickListener(onClickListener);
         myFeedBack.setOnClickListener(onClickListener);
-        myCustomer.setOnClickListener(onClickListener);
-        myAboutUs.setOnClickListener(onClickListener);
         myLogOut.setOnClickListener(onClickListener);
     }
 }

@@ -14,4 +14,5 @@ public final class Apis {
     public static final String WORK_SAVE_URL = "/v3/public/index.php/profile/update_workinfo";
     public static final String BANK_SAVE_URL = "/v3/public/index.php/profile/update_bankinfo";
     public static final String USER_INFO_URL = "/v3/public/index.php/profile";
+    public static final String FEEDBACK_URL = "/v3/public/index.php/feedback";
 }

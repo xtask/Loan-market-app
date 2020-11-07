@@ -29,11 +29,12 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="41dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="My Profile"
+                android:text="Feedback"
                 android:textColor="#FFFFFF"
                 android:textSize="18.75sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feedBackMail"
                 android:layout_width="wrap_content"
                 android:layout_height="114dp"
                 android:layout_marginBottom="10dp"
@@ -43,7 +44,7 @@
                 android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:textSize="19.2sp"
-                android:text="Any questions about the App, please contact us by E-mail, \n\n E-mail: service@xxCash.com" />
+                android:text="Any questions about the App, please contact us by E-mail, \n\n E-mail: " />
 
 
 
@@ -68,9 +69,8 @@
                 android:orientation="vertical"
                 tools:ignore="MissingConstraints">
 
-
-
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/messageBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat_bold"
@@ -83,7 +83,6 @@
                     android:paddingEnd="16dp"
                     android:textColor="#2A26A0"
                     android:textSize="16sp"/>
-
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -123,6 +122,7 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/sendMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
