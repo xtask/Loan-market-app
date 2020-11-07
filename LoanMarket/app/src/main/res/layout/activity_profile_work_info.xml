@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProfileWorkInfoActivity">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="41dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Work information"
+            android:textColor="#ff000000"
+            android:textSize="18.75sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/back_page">
+
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="87.5dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:enabled="false"
+                android:hint="Employment Type"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textColor="#2A26A0"
+                android:textSize="16sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/myProfileEmployment"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:drawableEnd="@mipmap/edit_right"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:text="Employment Type"
+                android:focusableInTouchMode="false"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textSize="16sp"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:enabled="false"
+                android:hint="Your Monthly Salary"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textColor="#2A26A0"
+                android:textSize="16sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/myProfileSalary"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:drawableEnd="@mipmap/edit_right"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:text="50,000"
+                android:focusableInTouchMode="false"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textSize="16sp"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:enabled="false"
+                android:hint="Monthly Family Income"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textColor="#2A26A0"
+                android:textSize="16sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/myProfileIncome"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:drawableEnd="@mipmap/edit_right"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:text="300,000"
+                android:focusableInTouchMode="false"
+                android:inputType="textPersonName"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp"
+                android:textSize="16sp"/>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/myProfileWorkSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/save">
+
+        </androidx.appcompat.widget.AppCompatImageButton>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

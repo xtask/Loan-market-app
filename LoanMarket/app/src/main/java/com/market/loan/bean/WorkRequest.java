@@ -5,6 +5,18 @@ public class WorkRequest {
     String monthly_salary;
     String monthly_family_salary;
 
+    public WorkRequest() {
+
+
+    }
+
+    public WorkRequest(UserResult userResult) {
+
+        this.employment_type = userResult.employmentType;
+        this.monthly_salary = userResult.monthlySalary;
+        this.monthly_family_salary = userResult.monthlyFamilySalary;
+    }
+
     public String getEmployment_type() {
         return employment_type;
     }

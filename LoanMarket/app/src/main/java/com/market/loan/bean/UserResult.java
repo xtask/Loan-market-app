@@ -1,11 +1,14 @@
 package com.market.loan.bean;
 
 public class UserResult {
+    String id;
     String gender;
     String marital;
     String education;
     String email;
     String name;
+    String mobile;
+    String panNo;
     String birthday;
 
     String ifscCode;
@@ -17,6 +20,29 @@ public class UserResult {
     String monthlySalary;
     String monthlyFamilySalary;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPanNo() {
+        return panNo;
+    }
+
+    public void setPanNo(String panNo) {
+        this.panNo = panNo;
+    }
 
     public String getGender() {
         return gender;

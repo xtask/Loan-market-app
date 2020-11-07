@@ -52,13 +52,12 @@ public class MyProfileActivity extends AppCompatActivity {
                 if (id == R.id.profileBaseInfo) {
                     activityClass = ProfileBasicInfoActivity.class;
                 } else if (id == R.id.profileWorkInfo) {
-
+                    activityClass = ProfileWorkInfoActivity.class;
                 } else if (id == R.id.profileBankInfo) {
-
+                    activityClass = ProfileBankInfoActivity.class;
                 }
                 Intent intent = new Intent(getApplicationContext(), activityClass);
                 startActivity(intent);
-                finish();
             }
         };
         profileBaseInfo.setOnClickListener(onClickListener);

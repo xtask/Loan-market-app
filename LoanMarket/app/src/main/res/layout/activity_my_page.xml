@@ -63,7 +63,17 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="+91 3422 72889"
+                android:text="+91"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/myPageMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="3422 72889"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 

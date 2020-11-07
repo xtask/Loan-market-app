@@ -5,6 +5,15 @@ public class BankRequest {
     String bank_name;
     String bank_account_no;
 
+    public BankRequest() {
+    }
+
+    public BankRequest(UserResult userResult) {
+        this.ifsc_code = userResult.ifscCode;
+        this.bank_name = userResult.bankName;
+        this.bank_account_no = userResult.bankAccountNo;
+    }
+
     public String getIfsc_code() {
         return ifsc_code;
     }
