@@ -8,6 +8,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
@@ -58,22 +59,28 @@ public class PayActivity extends AppCompatActivity {
         final LinearLayoutCompat detailsMain = findViewById(R.id.detailsMain);
         final LinearLayoutCompat detailsList = findViewById(R.id.detailsList);
 
+        final AppCompatImageButton payNow = findViewById(R.id.payNow);
+
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = v.getId();
-                if (id == R.id.goneViewBtn){
+                if (id == R.id.goneViewBtn) {
                     detailsMain.setVisibility(View.VISIBLE);
                     detailsList.setVisibility(View.GONE);
-                }else if(id == R.id.goneViewBtnGone){
+                } else if (id == R.id.goneViewBtnGone) {
                     detailsMain.setVisibility(View.GONE);
                     detailsList.setVisibility(View.VISIBLE);
+                } else if (id == R.id.payNow) {
+                    Intent intent = new Intent(getApplicationContext(), PayEndActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-
             }
         };
         goneViewBtn.setOnClickListener(clickListener);
         goneViewBtnGone.setOnClickListener(clickListener);
+        payNow.setOnClickListener(clickListener);
 
         payViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
