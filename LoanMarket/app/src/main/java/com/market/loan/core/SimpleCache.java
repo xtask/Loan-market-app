@@ -18,8 +18,6 @@ public class SimpleCache {
         basicHeader.setAdid(Constants.ADID);
         basicHeader.setGpsAdid(Constants.GPS_ADID);
 
-
-        // todo init page
         basicHeader.setDeviceId("");
         basicHeader.setAppVersion("");
     }
