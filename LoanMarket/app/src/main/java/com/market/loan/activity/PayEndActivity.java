@@ -22,6 +22,7 @@ import com.market.loan.bean.Vip;
 import com.market.loan.constant.Status;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MainViewModel;
+import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class PayEndActivity extends AppCompatActivity {
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
+        final LoadDialog loadDialog = new LoadDialog(PayEndActivity.this);
 
 
         View.OnClickListener bottomClick = new View.OnClickListener(){
@@ -66,6 +68,7 @@ public class PayEndActivity extends AppCompatActivity {
         mainViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
+                loadDialog.hide();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     vips = result.getData().getViplist();
                     List<Vip> vipsTemp = vips;
@@ -81,7 +84,7 @@ public class PayEndActivity extends AppCompatActivity {
             }
 
         });
-
+        loadDialog.show("loading...");
         mainViewModel.getProduct();
 
 

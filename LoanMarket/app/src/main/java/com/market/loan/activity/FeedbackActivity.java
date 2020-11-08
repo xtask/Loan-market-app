@@ -19,6 +19,7 @@ import com.market.loan.constant.Toasts;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
+import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -47,6 +48,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 finish();
             }
         });
+        final LoadDialog loadDialog = new LoadDialog(FeedbackActivity.this);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -56,15 +58,18 @@ public class FeedbackActivity extends AppCompatActivity {
                     Toast.makeText(FeedbackActivity.this, Toasts.CONTENT_IS_NOT_EMPTY, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                loadDialog.show("sending...");
                 Call call = new HttpRequest().post(Apis.FEEDBACK_URL, RequestBody.create(HttpRequest.JSON, "{content:" + content + "}"));
                 call.enqueue(new CallbackAdapter() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         super.onFailure(call, e);
+                        loadDialog.hide();
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) {
+                        loadDialog.hide();
                         assert response.body() != null;
                         if (response.isSuccessful()) {
                             finish();

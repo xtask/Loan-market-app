@@ -29,6 +29,7 @@ import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 import com.market.loan.model.LoginViewModel;
 import com.market.loan.tools.DictsFilter;
+import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -56,6 +57,7 @@ public class BaseInfoActivity extends AppCompatActivity {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             dicts = configResult.getDicts();
         }
+        final LoadDialog loadDialog = new LoadDialog(BaseInfoActivity.this);
         final AppCompatEditText birthday = findViewById(R.id.baseBirthday);
         final AppCompatEditText gender = findViewById(R.id.baseGender);
         final AppCompatEditText education = findViewById(R.id.baseEducation);
@@ -149,15 +151,17 @@ public class BaseInfoActivity extends AppCompatActivity {
                     if (result != null) {
                         Toast.makeText(BaseInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
+                        loadDialog.show("saving...");
                         Call call = new HttpRequest().post(Apis.BASE_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(baseRequest)));
                         call.enqueue(new CallbackAdapter() {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 super.onFailure(call, e);
-                                Result<String> result = new Result<>("Network request failed.");
+                                loadDialog.hide();
                             }
                             @Override
                             public void onResponse(Call call, Response response) {
+                                loadDialog.hide();
                                 assert response.body() != null;
                                 if (response.isSuccessful()){
                                     Intent intent = new Intent(getApplicationContext(), WorkInfoActivity.class);

@@ -24,7 +24,6 @@ import com.market.loan.activity.ReviewingActivity;
 import com.market.loan.activity.WorkInfoActivity;
 import com.market.loan.adapter.MainLoanRecyclerViewAdapter;
 import com.market.loan.adapter.MainMarqueeRecyclerViewAdapter;
-import com.market.loan.bean.ConfigData;
 import com.market.loan.bean.Limit;
 import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
@@ -34,13 +33,14 @@ import com.market.loan.bean.enums.Phase;
 import com.market.loan.constant.Status;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MainViewModel;
+import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
-
+    LoadDialog dialog = null;
     String phase;
     String certification;
 
@@ -53,24 +53,26 @@ public class MainActivity extends AppCompatActivity {
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
+        dialog = new LoadDialog(MainActivity.this);
 
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                dialog.show("loading...");
                 mainViewModel.getProduct();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        View.OnClickListener bottomClick = new View.OnClickListener(){
+        View.OnClickListener bottomClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = v.getId();
                 Class<?> activityClass = null;
-                if (id == R.id.moneyPackageBtn){
+                if (id == R.id.moneyPackageBtn) {
                     activityClass = MainActivity.class;
-                }else if(id == R.id.selfInfoBtn){
+                } else if (id == R.id.selfInfoBtn) {
                     activityClass = MyPageActivity.class;
                 }
                 Intent intent = new Intent(getApplicationContext(), activityClass);
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
+                dialog.hide();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ProductResult productResult = result.getData();
                     phase = productResult.getPhase();
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     Limit limit = limits.get(limits.size() - 1);
                     ConfigCache.amount = limit.getAmount();
                     loadLoan(limits);
-                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Result<List<MarqueeResult>> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
-                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -136,12 +139,14 @@ public class MainActivity extends AppCompatActivity {
                 marqueeListView.setAdapter(adapter);
             }
         });
+        dialog.show("loading...");
         mainViewModel.getProduct();
         mainViewModel.getMarquee();
     }
 
     @Override
     protected void onRestart() {
+        dialog.show("loading...");
         mainViewModel.getProduct();
         super.onRestart();
     }

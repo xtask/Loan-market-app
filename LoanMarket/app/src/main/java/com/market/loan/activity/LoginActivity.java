@@ -25,6 +25,7 @@ import com.market.loan.constant.Toasts;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.model.LoginViewModel;
+import com.market.loan.tools.LoadDialog;
 
 import java.util.Objects;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends NoBarActivity {
         setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+        final LoadDialog loadDialog = new LoadDialog(LoginActivity.this);
 
         View loginNext = findViewById(R.id.login_next);
 
@@ -53,6 +55,7 @@ public class LoginActivity extends NoBarActivity {
                 if (agreeCheckbox.isChecked()) {
                     String mobile = Objects.requireNonNull(mobileEdit.getText()).toString();
                     String code = Objects.requireNonNull(codeEdit.getText()).toString();
+                    loadDialog.show("login...");
                     loginViewModel.login(mobile, code);
                 } else {
                     errorMessageText.setText(Toasts.AGREE_CHECK_BOX);
@@ -63,6 +66,7 @@ public class LoginActivity extends NoBarActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<Result<LoginResult>>() {
             @Override
             public void onChanged(Result<LoginResult> result) {
+                loadDialog.hide();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ConfigCache.token = result.getData().getToken();
                     SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);

@@ -24,6 +24,7 @@ import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MyProfileViewModel;
 import com.market.loan.model.PayViewModel;
 import com.market.loan.tools.AmountFormat;
+import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class PayActivity extends AppCompatActivity {
         final LinearLayoutCompat detailsList = findViewById(R.id.detailsList);
 
         final AppCompatImageButton payNow = findViewById(R.id.payNow);
+        final LoadDialog loadDialog = new LoadDialog(PayActivity.this);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -86,6 +88,7 @@ public class PayActivity extends AppCompatActivity {
         payViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
+                loadDialog.hide();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ProductResult data = result.getData();
                     limits = data.getLimits();
@@ -125,6 +128,7 @@ public class PayActivity extends AppCompatActivity {
                 }
             }
         });
+        loadDialog.show("loading...");
         payViewModel.request();
         myProfileViewModel.request();
 

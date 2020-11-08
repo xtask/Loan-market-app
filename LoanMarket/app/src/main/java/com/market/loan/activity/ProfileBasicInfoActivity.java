@@ -28,6 +28,7 @@ import com.market.loan.core.ConfigCache;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 import com.market.loan.tools.DictsFilter;
+import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -55,6 +56,7 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             dicts = configResult.getDicts();
         }
+        final LoadDialog loadDialog = new LoadDialog(ProfileBasicInfoActivity.this);
 
         final AppCompatEditText birthday = findViewById(R.id.myProfileBirthday);
         final AppCompatEditText gender = findViewById(R.id.myProfileGender);
@@ -164,16 +166,18 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
                     if (result != null) {
                         Toast.makeText(ProfileBasicInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
+                        loadDialog.show("saving...");
                         Call call = new HttpRequest().post(Apis.BASE_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(myProfileRequest)));
                         call.enqueue(new CallbackAdapter() {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 super.onFailure(call, e);
-                                Result<String> result = new Result<>("Network request failed.");
+                                loadDialog.hide();
                             }
 
                             @Override
                             public void onResponse(Call call, Response response) {
+                                loadDialog.hide();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
                                     finish();
