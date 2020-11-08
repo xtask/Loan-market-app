@@ -16,7 +16,16 @@ import java.util.List;
 
 public class MainMarqueeRecyclerViewAdapter extends RecyclerView.Adapter<MainMarqueeRecyclerViewAdapter.ViewHolder> {
 
-    List<MarqueeResult> values;
+    private List<MarqueeResult> values;
+
+    public List<MarqueeResult> getValues() {
+        return values;
+    }
+
+    public void setValues(List<MarqueeResult> values) {
+        this.values = values;
+    }
+
     Context content;
     int resourceId;
 

@@ -3,6 +3,7 @@ package com.market.loan;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,14 +29,18 @@ import com.market.loan.bean.Limit;
 import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
+import com.market.loan.bean.Vip;
 import com.market.loan.bean.enums.Certification;
 import com.market.loan.bean.enums.Phase;
+import com.market.loan.constant.Constants;
 import com.market.loan.constant.Status;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MainViewModel;
 import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,10 +137,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            private void loadMarquee(List<MarqueeResult> marqueeResults) {
-                RecyclerView marqueeListView = findViewById(R.id.marqueeList);
+            private void loadMarquee(final List<MarqueeResult> marqueeResults) {
+                final RecyclerView marqueeListView = findViewById(R.id.marqueeList);
                 marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-                MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults, R.layout.activity_main_list_2);
+                final MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults, R.layout.activity_main_list_2);
+
+                final Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    int index = 0;
+                    @Override
+                    public void run() {
+                        if (index >= marqueeResults.size()) {
+                            index = 0;
+                        }
+                        marqueeListView.smoothScrollToPosition(index);
+                        index += 2;
+                    }
+                }, 1000, 3000);
+
+
                 marqueeListView.setAdapter(adapter);
             }
         });
