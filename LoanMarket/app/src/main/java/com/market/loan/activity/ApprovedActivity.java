@@ -27,6 +27,8 @@ import com.market.loan.tools.AmountFormat;
 import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ApprovedActivity extends AppCompatActivity {
 
@@ -44,7 +46,7 @@ public class ApprovedActivity extends AppCompatActivity {
         AppCompatTextView approvedAmount = findViewById(R.id.approvedAmount);
         AppCompatImageButton approvedNext = findViewById(R.id.approvedNext);
         String amount = ConfigCache.amount;
-        approvedAmount.setText(AmountFormat.format(amount));
+//        approvedAmount.setText(AmountFormat.format(amount));
         if (result != null) {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             approvedText.setText(configResult.getTipsCongratulations());
@@ -73,11 +75,24 @@ public class ApprovedActivity extends AppCompatActivity {
                 }
             }
 
-            private void loadMarquee(List<MarqueeResult> marqueeResults) {
-                RecyclerView marqueeListView = findViewById(R.id.marqueeList);
+            private void loadMarquee(final List<MarqueeResult> marqueeResults) {
+                final RecyclerView marqueeListView = findViewById(R.id.marqueeList);
                 marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
                 MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(ApprovedActivity.this, marqueeResults, R.layout.activity_approved_list);
                 marqueeListView.setAdapter(adapter);
+
+                final Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    int index = 0;
+                    @Override
+                    public void run() {
+                        if (index >= marqueeResults.size()) {
+                            index = 0;
+                        }
+                        marqueeListView.smoothScrollToPosition(index);
+                        index += 2;
+                    }
+                }, 1000, 3000);
             }
         });
         loadDialog.show("loading...");
