@@ -3,6 +3,7 @@ package com.market.loan.adapter;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.market.loan.MainActivity;
 import com.market.loan.R;
+import com.market.loan.activity.LoginActivity;
+import com.market.loan.activity.PayActivity;
 import com.market.loan.bean.Duration;
 import com.market.loan.bean.Limit;
 import com.market.loan.tools.AmountFormat;
@@ -43,17 +46,19 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final int index = position;
         final Limit limit = values.get(position);
         holder.amountText.setText(AmountFormat.format(limit.getAmount()));
         List<Duration> durations = limit.getDurations();
         holder.daysText.setText(durations.get(0).getDuration().split(" ")[0] + "-" + durations.get(durations.size() - 1).getDuration());
 
-        View.OnClickListener onClickListener = new View.OnClickListener(
-        ) {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) content;
-                mainActivity.selectorActivity();
+                Intent intent = new Intent(mainActivity, PayActivity.class);
+                intent.putExtra("index", index);
+                mainActivity.startActivity(intent);
             }
         };
         holder.layout.setOnClickListener(onClickListener);

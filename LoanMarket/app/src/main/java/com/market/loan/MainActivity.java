@@ -175,8 +175,5 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(getApplicationContext(), activityClass);
         startActivity(intent);
-        if (Phase.PAYMENT.toString().equals(phase)) {
-            finish();
-        }
     }
 }

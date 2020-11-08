@@ -82,6 +82,7 @@ public class PayActivity extends AppCompatActivity {
         goneViewBtnGone.setOnClickListener(clickListener);
         payNow.setOnClickListener(clickListener);
 
+
         payViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
@@ -89,7 +90,22 @@ public class PayActivity extends AppCompatActivity {
                     ProductResult data = result.getData();
                     limits = data.getLimits();
                     seekBarAmount.setMax(limits.size() - 1);
-                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
+                    boolean hasDefault = false;
+                    int indexValue = getIntent().getIntExtra("index", -1);
+                    if (indexValue > -1) {
+                        seekBarAmount.setProgress(indexValue);
+                    } else {
+                        for (int i = 0; i < limits.size(); i++) {
+                            if (limits.get(i).getIsDefault().equals("1")) {
+                                seekBarAmount.setProgress(i);
+                                hasDefault = true;
+                            }
+                        }
+                        if (!hasDefault) {
+                            seekBarAmount.setProgress(limits.size() - 1);
+                        }
+                    }
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -102,7 +118,7 @@ public class PayActivity extends AppCompatActivity {
             public void onChanged(Result<UserResult> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     bankCardNumber.setText(result.getData().getBankAccountNo());
-                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
+                } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -111,25 +127,24 @@ public class PayActivity extends AppCompatActivity {
         });
         payViewModel.request();
         myProfileViewModel.request();
+
         seekBarAmount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Limit limit = limits.get(progress);
                 payAmount.setText(AmountFormat.format(limit.getAmount()));
                 durations = limit.getDurations();
+                seekBarMonths.setMax(0);
                 seekBarMonths.setMax(durations.size() - 1);
-                if (seekBarMonths.getProgress() == 0) {
-                    Duration duration = durations.get(0);
-                    payMonths.setText(duration.getDuration());
-                    amountOld.setText(duration.getMemberOriFee());
-                    amountNew.setText(duration.getMemberFee());
-                    loanTerm.setText(duration.getDuration());
-                    loanInterest.setText(duration.getInterest());
-                    monthlyPayment.setText(duration.getMonthlyPayment());
-                    monthlyPrincipal.setText(duration.getMonthlyPrincipal());
-                    monthlyInerest.setText(duration.getMonthlyInerest());
-                } else {
-                    seekBarMonths.setProgress(0);
+                boolean hasDefault = false;
+                for (int i = 0; i < durations.size(); i++) {
+                    if (durations.get(i).getIsDefault().equals("1")) {
+                        seekBarMonths.setProgress(i);
+                        hasDefault = true;
+                    }
+                }
+                if (!hasDefault) {
+                    seekBarMonths.setProgress(durations.size() - 1);
                 }
             }
 
@@ -154,7 +169,6 @@ public class PayActivity extends AppCompatActivity {
                 monthlyPayment.setText(duration.getMonthlyPayment());
                 monthlyPrincipal.setText(duration.getMonthlyPrincipal());
                 monthlyInerest.setText(duration.getMonthlyInerest());
-
             }
 
             @Override
@@ -165,5 +179,7 @@ public class PayActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+
+
     }
 }
