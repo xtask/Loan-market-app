@@ -3,10 +3,8 @@ package com.market.loan;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,23 +27,19 @@ import com.market.loan.bean.Limit;
 import com.market.loan.bean.MarqueeResult;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
-import com.market.loan.bean.Vip;
 import com.market.loan.bean.enums.Certification;
 import com.market.loan.bean.enums.Phase;
-import com.market.loan.constant.Constants;
 import com.market.loan.constant.Status;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MainViewModel;
-import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private MainViewModel mainViewModel;
-    LoadDialog dialog = null;
     String phase;
     String certification;
 
@@ -58,13 +52,11 @@ public class MainActivity extends AppCompatActivity {
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
-        dialog = new LoadDialog(MainActivity.this);
-
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                dialog.show("loading...");
+                show();
                 mainViewModel.getProduct();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -100,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
-                dialog.hide();
+                dismiss();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ProductResult productResult = result.getData();
                     phase = productResult.getPhase();
@@ -145,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 final Timer timer = new Timer();
                 timer.scheduleAtFixedRate(new TimerTask() {
                     int index = 0;
+
                     @Override
                     public void run() {
                         if (index >= marqueeResults.size()) {
@@ -159,14 +152,14 @@ public class MainActivity extends AppCompatActivity {
                 marqueeListView.setAdapter(adapter);
             }
         });
-        dialog.show("loading...");
+        show();
         mainViewModel.getProduct();
         mainViewModel.getMarquee();
     }
 
     @Override
     protected void onRestart() {
-        dialog.show("loading...");
+        show();
         mainViewModel.getProduct();
         super.onRestart();
     }

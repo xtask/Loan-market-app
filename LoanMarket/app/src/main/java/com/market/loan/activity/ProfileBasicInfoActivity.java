@@ -8,7 +8,6 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -16,19 +15,18 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.adapter.DialogItemAdapter;
 import com.market.loan.bean.BaseRequest;
 import com.market.loan.bean.ConfigData;
 import com.market.loan.bean.ConfigResult;
-import com.market.loan.bean.Result;
 import com.market.loan.bean.UserResult;
 import com.market.loan.constant.Apis;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 import com.market.loan.tools.DictsFilter;
-import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -39,7 +37,7 @@ import okhttp3.Call;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ProfileBasicInfoActivity extends AppCompatActivity {
+public class ProfileBasicInfoActivity extends BaseActivity {
 
     List<ConfigData> dicts;
     List<ConfigData> genderDicts;
@@ -56,7 +54,6 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             dicts = configResult.getDicts();
         }
-        final LoadDialog loadDialog = new LoadDialog(ProfileBasicInfoActivity.this);
 
         final AppCompatEditText birthday = findViewById(R.id.myProfileBirthday);
         final AppCompatEditText gender = findViewById(R.id.myProfileGender);
@@ -166,18 +163,18 @@ public class ProfileBasicInfoActivity extends AppCompatActivity {
                     if (result != null) {
                         Toast.makeText(ProfileBasicInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
-                        loadDialog.show("saving...");
+                        show();
                         Call call = new HttpRequest().post(Apis.BASE_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(myProfileRequest)));
                         call.enqueue(new CallbackAdapter() {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 super.onFailure(call, e);
-                                loadDialog.hide();
+                                dismiss();
                             }
 
                             @Override
                             public void onResponse(Call call, Response response) {
-                                loadDialog.hide();
+                                dismiss();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
                                     finish();

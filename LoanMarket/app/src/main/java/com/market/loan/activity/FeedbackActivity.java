@@ -5,21 +5,18 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.bean.ConfigResult;
-import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
 import com.market.loan.constant.Toasts;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
-import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -28,7 +25,7 @@ import okhttp3.Call;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class FeedbackActivity extends AppCompatActivity {
+public class FeedbackActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,6 @@ public class FeedbackActivity extends AppCompatActivity {
                 finish();
             }
         });
-        final LoadDialog loadDialog = new LoadDialog(FeedbackActivity.this);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -58,18 +54,18 @@ public class FeedbackActivity extends AppCompatActivity {
                     Toast.makeText(FeedbackActivity.this, Toasts.CONTENT_IS_NOT_EMPTY, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                loadDialog.show("sending...");
+                show();
                 Call call = new HttpRequest().post(Apis.FEEDBACK_URL, RequestBody.create(HttpRequest.JSON, "{content:" + content + "}"));
                 call.enqueue(new CallbackAdapter() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         super.onFailure(call, e);
-                        loadDialog.hide();
+                        dismiss();
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) {
-                        loadDialog.hide();
+                        dismiss();
                         assert response.body() != null;
                         if (response.isSuccessful()) {
                             finish();

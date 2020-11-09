@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.fastjson.JSON;
-import com.market.loan.activity.ApprovedActivity;
 import com.market.loan.activity.LoginActivity;
 import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;

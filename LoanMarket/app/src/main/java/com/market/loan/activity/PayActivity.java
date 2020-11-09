@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.bean.Duration;
 import com.market.loan.bean.Limit;
@@ -20,15 +21,13 @@ import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
 import com.market.loan.bean.UserResult;
 import com.market.loan.constant.Status;
-import com.market.loan.core.ConfigCache;
 import com.market.loan.model.MyProfileViewModel;
 import com.market.loan.model.PayViewModel;
 import com.market.loan.tools.AmountFormat;
-import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 
-public class PayActivity extends AppCompatActivity {
+public class PayActivity extends BaseActivity {
     List<Limit> limits;
     List<Duration> durations;
     private PayViewModel payViewModel;
@@ -61,7 +60,6 @@ public class PayActivity extends AppCompatActivity {
         final LinearLayoutCompat detailsList = findViewById(R.id.detailsList);
 
         final AppCompatImageButton payNow = findViewById(R.id.payNow);
-        final LoadDialog loadDialog = new LoadDialog(PayActivity.this);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -88,7 +86,7 @@ public class PayActivity extends AppCompatActivity {
         payViewModel.getProductResult().observe(this, new Observer<Result<ProductResult>>() {
             @Override
             public void onChanged(Result<ProductResult> result) {
-                loadDialog.hide();
+                dismiss();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ProductResult data = result.getData();
                     limits = data.getLimits();
@@ -128,7 +126,7 @@ public class PayActivity extends AppCompatActivity {
                 }
             }
         });
-        loadDialog.show("loading...");
+        show();
         payViewModel.request();
         myProfileViewModel.request();
 

@@ -16,20 +16,16 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.adapter.DialogItemAdapter;
 import com.market.loan.bean.BaseRequest;
 import com.market.loan.bean.ConfigData;
 import com.market.loan.bean.ConfigResult;
-import com.market.loan.bean.LoginResult;
-import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
-import com.market.loan.model.LoginViewModel;
 import com.market.loan.tools.DictsFilter;
-import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -40,7 +36,7 @@ import okhttp3.Call;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BaseInfoActivity extends AppCompatActivity {
+public class BaseInfoActivity extends BaseActivity {
 
     List<ConfigData> dicts;
     List<ConfigData> genderDicts;
@@ -57,7 +53,6 @@ public class BaseInfoActivity extends AppCompatActivity {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             dicts = configResult.getDicts();
         }
-        final LoadDialog loadDialog = new LoadDialog(BaseInfoActivity.this);
         final AppCompatEditText birthday = findViewById(R.id.baseBirthday);
         final AppCompatEditText gender = findViewById(R.id.baseGender);
         final AppCompatEditText education = findViewById(R.id.baseEducation);
@@ -151,19 +146,20 @@ public class BaseInfoActivity extends AppCompatActivity {
                     if (result != null) {
                         Toast.makeText(BaseInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
-                        loadDialog.show("saving...");
+                        show();
                         Call call = new HttpRequest().post(Apis.BASE_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(baseRequest)));
                         call.enqueue(new CallbackAdapter() {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 super.onFailure(call, e);
-                                loadDialog.hide();
+                                dismiss();
                             }
+
                             @Override
                             public void onResponse(Call call, Response response) {
-                                loadDialog.hide();
+                                dismiss();
                                 assert response.body() != null;
-                                if (response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     Intent intent = new Intent(getApplicationContext(), WorkInfoActivity.class);
                                     startActivity(intent);
                                     finish();

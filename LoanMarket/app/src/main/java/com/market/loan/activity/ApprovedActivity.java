@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
-import com.market.loan.MainActivity;
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.adapter.MainMarqueeRecyclerViewAdapter;
 import com.market.loan.bean.ConfigResult;
@@ -24,13 +24,12 @@ import com.market.loan.constant.Status;
 import com.market.loan.core.ConfigCache;
 import com.market.loan.model.ApprovedViewModel;
 import com.market.loan.tools.AmountFormat;
-import com.market.loan.tools.LoadDialog;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ApprovedActivity extends AppCompatActivity {
+public class ApprovedActivity extends BaseActivity {
 
     private ApprovedViewModel approvedViewModel;
     @Override
@@ -39,14 +38,13 @@ public class ApprovedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_approved);
         approvedViewModel = new ViewModelProvider(this).get(ApprovedViewModel.class);
 
-        final LoadDialog loadDialog = new LoadDialog(ApprovedActivity.this);
         SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
         String result = profile.getString("configResult", null);
         AppCompatTextView approvedText = findViewById(R.id.approvedText);
         AppCompatTextView approvedAmount = findViewById(R.id.approvedAmount);
         AppCompatImageButton approvedNext = findViewById(R.id.approvedNext);
         String amount = ConfigCache.amount;
-//        approvedAmount.setText(AmountFormat.format(amount));
+        approvedAmount.setText(AmountFormat.format(amount));
         if (result != null) {
             ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
             approvedText.setText(configResult.getTipsCongratulations());
@@ -65,7 +63,7 @@ public class ApprovedActivity extends AppCompatActivity {
         approvedViewModel.getMarqueeResult().observe(this, new Observer<Result<List<MarqueeResult>>>() {
             @Override
             public void onChanged(Result<List<MarqueeResult>> result) {
-                loadDialog.hide();
+                dismiss();
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
@@ -95,7 +93,7 @@ public class ApprovedActivity extends AppCompatActivity {
                 }, 1000, 3000);
             }
         });
-        loadDialog.show("loading...");
+        show();
         approvedViewModel.getMarquee();
     }
 }

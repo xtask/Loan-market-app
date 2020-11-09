@@ -10,13 +10,12 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.alibaba.fastjson.JSON;
+import com.market.loan.BaseActivity;
 import com.market.loan.R;
 import com.market.loan.bean.BankRequest;
-import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
-import com.market.loan.tools.LoadDialog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import okhttp3.Call;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BankInfoActivity extends AppCompatActivity {
+public class BankInfoActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class BankInfoActivity extends AppCompatActivity {
 
         final BankRequest bankRequest = new BankRequest();
 
-        final LoadDialog loadDialog = new LoadDialog(BankInfoActivity.this);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,18 +56,18 @@ public class BankInfoActivity extends AppCompatActivity {
                     if (result != null) {
                         Toast.makeText(BankInfoActivity.this, result, Toast.LENGTH_SHORT).show();
                     } else {
-                        loadDialog.show("saving...");
+                        show();
                         Call call = new HttpRequest().post(Apis.BANK_SAVE_URL, RequestBody.create(HttpRequest.JSON, JSON.toJSONString(bankRequest)));
                         call.enqueue(new CallbackAdapter() {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 super.onFailure(call, e);
-                                loadDialog.hide();
+                                dismiss();
                             }
 
                             @Override
                             public void onResponse(Call call, Response response) {
-                                loadDialog.hide();
+                                dismiss();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
                                     Intent intent = new Intent(getApplicationContext(), ReviewingActivity.class);
