@@ -34,7 +34,7 @@ public class PayEndActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_end);
 
-        AppCompatImageButton moreLoan = findViewById(R.id.getMoreLoan);
+        final AppCompatImageButton moreLoan = findViewById(R.id.getMoreLoan);
 
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
@@ -88,6 +88,7 @@ public class PayEndActivity extends BaseActivity {
                 int size = values.size();
                 adapter.setValues(vips);
                 adapter.notifyItemRangeInserted(size, vips.size() - size);
+                moreLoan.setVisibility(View.GONE);
             }
         });
     }

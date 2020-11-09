@@ -118,42 +118,6 @@
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/myCustomer"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:layout_marginTop="9dp"
-            android:drawablePadding="14dp"
-            android:background="@mipmap/my_page_item_bg"
-            android:drawableLeft="@mipmap/customer_service"
-            android:drawableRight="@mipmap/aqua"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
-            android:hint="Customer Service"
-            android:paddingStart="14dp"
-            android:paddingEnd="20dp"
-            android:textColor="#3A7CE4"
-            android:textSize="16sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/myAboutUs"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:layout_marginTop="9dp"
-            android:drawablePadding="14dp"
-            android:background="@mipmap/my_page_item_bg"
-            android:drawableLeft="@mipmap/about_us"
-            android:drawableRight="@mipmap/aqua"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
-            android:hint="About us"
-            android:paddingStart="14dp"
-            android:paddingEnd="20dp"
-            android:textColor="#3A7CE4"
-            android:textSize="16sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/myLogOut"
             android:layout_width="match_parent"
             android:layout_height="59dp"

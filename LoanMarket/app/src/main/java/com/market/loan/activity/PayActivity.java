@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.SeekBar;
 
 import com.market.loan.BaseActivity;
+import com.market.loan.MainActivity;
 import com.market.loan.R;
 import com.market.loan.bean.Duration;
 import com.market.loan.bean.Limit;
@@ -72,7 +73,7 @@ public class PayActivity extends BaseActivity {
                     detailsMain.setVisibility(View.GONE);
                     detailsList.setVisibility(View.VISIBLE);
                 } else if (id == R.id.payNow) {
-                    Intent intent = new Intent(getApplicationContext(), PayEndActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -56,7 +56,7 @@ public class MainLoanRecyclerViewAdapter extends RecyclerView.Adapter<MainLoanRe
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) content;
-                Intent intent = new Intent(mainActivity, PayActivity.class);
+                Intent intent = new Intent(mainActivity, mainActivity.selectorActivity());
                 intent.putExtra("index", index);
                 mainActivity.startActivity(intent);
             }

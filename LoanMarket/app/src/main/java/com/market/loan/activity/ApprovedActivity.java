@@ -8,9 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -73,12 +75,18 @@ public class ApprovedActivity extends BaseActivity {
                 }
             }
 
+            @SuppressLint("ClickableViewAccessibility")
             private void loadMarquee(final List<MarqueeResult> marqueeResults) {
                 final RecyclerView marqueeListView = findViewById(R.id.marqueeList);
                 marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
                 MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(ApprovedActivity.this, marqueeResults, R.layout.activity_approved_list);
                 marqueeListView.setAdapter(adapter);
-
+                marqueeListView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
                 final Timer timer = new Timer();
                 timer.scheduleAtFixedRate(new TimerTask() {
                     int index = 0;

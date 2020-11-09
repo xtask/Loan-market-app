@@ -1,8 +1,10 @@
 package com.market.loan;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -43,6 +45,7 @@ public class MainActivity extends BaseActivity {
     private MainViewModel mainViewModel;
     String phase;
     String certification;
+    boolean timerStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class MainActivity extends BaseActivity {
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
+        final Timer timer = new Timer();
         final LinearLayoutCompat showLayout = findViewById(R.id.showLayout);
 
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
@@ -88,7 +92,7 @@ public class MainActivity extends BaseActivity {
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                Intent intent = new Intent(getApplicationContext(), selectorActivity());
                 startActivity(intent);
             }
         });
@@ -105,7 +109,8 @@ public class MainActivity extends BaseActivity {
                     Limit limit = limits.get(limits.size() - 1);
                     ConfigCache.amount = limit.getAmount();
                     if (Phase.PAYMENT.toString().equals(phase)){
-                        selectorActivity();
+                        Intent intent = new Intent(getApplicationContext(), selectorActivity());
+                        startActivity(intent);
                         finish();
                         overridePendingTransition(0, 0);
                     }else{
@@ -141,26 +146,35 @@ public class MainActivity extends BaseActivity {
                 }
             }
 
+            @SuppressLint("ClickableViewAccessibility")
             private void loadMarquee(final List<MarqueeResult> marqueeResults) {
                 final RecyclerView marqueeListView = findViewById(R.id.marqueeList);
-                marqueeListView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+                StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                marqueeListView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+                marqueeListView.setLayoutManager(staggeredGridLayoutManager);
                 final MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults, R.layout.activity_main_list_2);
 
-                final Timer timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    int index = 0;
+                if (!timerStatus){
+                    TimerTask task = new TimerTask() {
+                        int index = 0;
 
-                    @Override
-                    public void run() {
-                        if (index >= marqueeResults.size()) {
-                            index = 0;
+                        @Override
+                        public void run() {
+                            if (index >= marqueeResults.size()) {
+                                index = 0;
+                            }
+                            marqueeListView.smoothScrollToPosition(index);
+                            index += 2;
                         }
-                        marqueeListView.smoothScrollToPosition(index);
-                        index += 2;
-                    }
-                }, 1000, 3000);
-
-
+                    };
+                    timer.scheduleAtFixedRate(task, 1000, 2000);
+                }
+                timerStatus = true;
                 marqueeListView.setAdapter(adapter);
             }
         });
@@ -175,7 +189,7 @@ public class MainActivity extends BaseActivity {
         super.onRestart();
     }
 
-    public void selectorActivity() {
+    public Class<?> selectorActivity() {
         Class<?> activityClass = null;
         if (Phase.UNAUTHORIZED.toString().equals(phase)) {
             if (Certification.BASE_INFO.toString().equals(certification)) {
@@ -202,7 +216,6 @@ public class MainActivity extends BaseActivity {
         } else if (Phase.PAYMENT.toString().equals(phase)) {
             activityClass = PayEndActivity.class;
         }
-        Intent intent = new Intent(getApplicationContext(), activityClass);
-        startActivity(intent);
+        return activityClass;
     }
 }
