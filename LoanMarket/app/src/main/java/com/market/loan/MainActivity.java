@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,8 @@ public class MainActivity extends BaseActivity {
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
 
+        final LinearLayoutCompat showLayout = findViewById(R.id.showLayout);
+
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -85,7 +88,8 @@ public class MainActivity extends BaseActivity {
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectorActivity();
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -100,7 +104,15 @@ public class MainActivity extends BaseActivity {
                     List<Limit> limits = result.getData().getLimits();
                     Limit limit = limits.get(limits.size() - 1);
                     ConfigCache.amount = limit.getAmount();
-                    loadLoan(limits);
+                    if (Phase.PAYMENT.toString().equals(phase)){
+                        selectorActivity();
+                        finish();
+                        overridePendingTransition(0, 0);
+                    }else{
+                        showLayout.setVisibility(View.VISIBLE);
+                        loadLoan(limits);
+                        mainViewModel.getMarquee();
+                    }
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -154,7 +166,6 @@ public class MainActivity extends BaseActivity {
         });
         show();
         mainViewModel.getProduct();
-        mainViewModel.getMarquee();
     }
 
     @Override

@@ -80,10 +80,26 @@ public class LoginActivity extends NoBarActivity {
         final AppCompatTextView smsCodeText = findViewById(R.id.smsCode);
         final AppCompatTextView codeTimeText = findViewById(R.id.codeTime);
         smsCodeText.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String mobile = Objects.requireNonNull(mobileEdit.getText()).toString();
                 loginViewModel.smsCode(mobile);
+                smsCodeText.setText("resend");
+                smsCodeText.setVisibility(View.GONE);
+                new CountDownTimer(Constants.MAX_SMS_CODE_TIME, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        codeTimeText.setText("(" + millisUntilFinished / 1000 + ")");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        smsCodeText.setVisibility(View.VISIBLE);
+                        codeTimeText.setVisibility(View.GONE);
+                    }
+                }.start();
+                codeTimeText.setVisibility(View.VISIBLE);
             }
         });
         loginViewModel.getSmsCode().observe(this, new Observer<Result<String>>() {
@@ -92,21 +108,9 @@ public class LoginActivity extends NoBarActivity {
             @Override
             public void onChanged(Result<String> result) {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
-                    smsCodeText.setText("resend");
-                    smsCodeText.setVisibility(View.GONE);
-                    new CountDownTimer(Constants.MAX_SMS_CODE_TIME, 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            codeTimeText.setText("(" + millisUntilFinished / 1000 + ")");
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            smsCodeText.setVisibility(View.VISIBLE);
-                            codeTimeText.setVisibility(View.GONE);
-                        }
-                    }.start();
-                    codeTimeText.setVisibility(View.VISIBLE);
+                    if (result.getData() == null){
+                        errorMessageText.setText("send code error!");
+                    }
                 } else {
                     errorMessageText.setText(result.getMessage());
                 }
