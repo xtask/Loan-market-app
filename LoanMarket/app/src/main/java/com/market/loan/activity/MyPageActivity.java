@@ -14,10 +14,12 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.fastjson.JSON;
 import com.market.loan.MainActivity;
 import com.market.loan.R;
 import com.market.loan.StartActivity;
 import com.market.loan.bean.ConfigData;
+import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Result;
 import com.market.loan.bean.UserResult;
 import com.market.loan.constant.Status;
@@ -56,7 +58,15 @@ public class MyPageActivity extends AppCompatActivity {
         final AppCompatButton myLogOut = findViewById(R.id.myLogOut);
         AppCompatImageButton moneyPackageBtn = findViewById(R.id.moneyPackageBtn);
         AppCompatImageButton selfInfoBtn = findViewById(R.id.selfInfoBtn);
+        AppCompatTextView bottomMyPageText = findViewById(R.id.bottom_my_page_text);
 
+        SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+        String result = profile.getString("configResult", null);
+
+
+        ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
+        assert configResult != null;
+        bottomMyPageText.setText(configResult.getSysServiceEmailBak());
 
         View.OnClickListener bottomClick = new View.OnClickListener() {
             @Override
@@ -109,9 +119,12 @@ public class MyPageActivity extends AppCompatActivity {
                                         edit.apply();
                                         edit.commit();
                                         dialog.cancel();
-                                        while (ConfigCache.token.equals("") && "".equals(profile.getString("token", ""))) {
-                                            System.exit(0);
-                                        }
+                                        activityClass = LoginActivity.class;
+                                        Intent intent = new Intent(getApplicationContext(), activityClass);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
                                     }
                                 }).show();
                     }

@@ -246,7 +246,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
-            android:src="@mipmap/more_loan"
+            android:src="@mipmap/home_get_loan"
             tools:ignore="MissingConstraints" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

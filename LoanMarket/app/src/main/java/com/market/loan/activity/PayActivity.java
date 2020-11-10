@@ -9,13 +9,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 
+import com.alibaba.fastjson.JSON;
 import com.market.loan.BaseActivity;
 import com.market.loan.MainActivity;
 import com.market.loan.R;
+import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.Duration;
 import com.market.loan.bean.Limit;
 import com.market.loan.bean.ProductResult;
@@ -59,6 +62,16 @@ public class PayActivity extends BaseActivity {
         final AppCompatImageButton goneViewBtnGone = findViewById(R.id.goneViewBtnGone);
         final LinearLayoutCompat detailsMain = findViewById(R.id.detailsMain);
         final LinearLayoutCompat detailsList = findViewById(R.id.detailsList);
+
+        final AppCompatTextView bottomPayText = findViewById(R.id.bottom_pay_text);
+
+        SharedPreferences profile = getSharedPreferences("basic_profile", MODE_PRIVATE);
+        String result = profile.getString("configResult", null);
+
+
+        ConfigResult configResult = JSON.parseObject(result, ConfigResult.class);
+        assert configResult != null;
+        bottomPayText.setText(configResult.getTipsPay());
 
         final AppCompatImageButton payNow = findViewById(R.id.payNow);
 

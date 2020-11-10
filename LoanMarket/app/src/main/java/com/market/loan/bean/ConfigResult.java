@@ -5,6 +5,7 @@ import java.util.List;
 public class ConfigResult {
 
     String sysServiceEmail;
+    String sysServiceEmailBak;
     String sysServiceTime;
     String tipsPay;
     String tipsCongratulations;
@@ -13,6 +14,13 @@ public class ConfigResult {
 
     List<ConfigData> dicts;
 
+    public String getSysServiceEmailBak() {
+        return sysServiceEmailBak;
+    }
+
+    public void setSysServiceEmailBak(String sysServiceEmailBak) {
+        this.sysServiceEmailBak = sysServiceEmailBak;
+    }
 
     public String getSysServiceEmail() {
         return sysServiceEmail;

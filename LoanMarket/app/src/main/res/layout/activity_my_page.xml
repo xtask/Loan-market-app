@@ -137,6 +137,31 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="90dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bottom_my_page_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="53dp"
+            android:gravity="center"
+            android:text="If you fall,it be refunded to you within 5 days"
+            android:textColor="#ff000000"
+            android:textSize="12sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="80dp"
