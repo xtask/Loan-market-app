@@ -74,7 +74,7 @@ public class ReviewingActivity extends AppCompatActivity {
                         List<Limit> limits = resultData.getLimits();
                         Limit limit = limits.get(limits.size() - 1);
                         ConfigCache.amount = limit.getAmount();
-                        Intent intent = new Intent(getApplicationContext(), ApprovedActivity.class);
+                        Intent intent = new Intent(ReviewingActivity.this, ApprovedActivity.class);
                         startActivity(intent);
                         finish();
                     }

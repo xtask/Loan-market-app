@@ -75,7 +75,7 @@ public class StartActivity extends NoBarActivity {
         } else {
             activityClass = MainActivity.class;
         }
-        Intent intent = new Intent(getApplicationContext(), activityClass);
+        Intent intent = new Intent(StartActivity.this, activityClass);
         startActivity(intent);
         finish();
 

@@ -160,7 +160,7 @@ public class BaseInfoActivity extends BaseActivity {
                                 dismiss();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), WorkInfoActivity.class);
+                                    Intent intent = new Intent(BaseInfoActivity.this, WorkInfoActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

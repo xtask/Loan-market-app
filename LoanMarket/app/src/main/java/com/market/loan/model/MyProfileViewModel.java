@@ -40,7 +40,7 @@ public class MyProfileViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<UserResult> result = new Result<>("Network request failed.");
+                Result<UserResult> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 MyProfileViewModel.this.userResult.postValue(result);
             }
 

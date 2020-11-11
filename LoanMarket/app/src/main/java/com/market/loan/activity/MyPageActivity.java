@@ -45,7 +45,7 @@ public class MyPageActivity extends AppCompatActivity {
                     AppCompatTextView myPageMobile = findViewById(R.id.myPageMobile);
                     myPageMobile.setText(ConfigCache.userResult.getMobile());
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(MyPageActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -78,7 +78,7 @@ public class MyPageActivity extends AppCompatActivity {
                 } else if (id == R.id.selfInfoBtn) {
                     activityClass = MyPageActivity.class;
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
+                Intent intent = new Intent(MyPageActivity.this, activityClass);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();
@@ -120,7 +120,7 @@ public class MyPageActivity extends AppCompatActivity {
                                         edit.commit();
                                         dialog.cancel();
                                         activityClass = LoginActivity.class;
-                                        Intent intent = new Intent(getApplicationContext(), activityClass);
+                                        Intent intent = new Intent(MyPageActivity.this, activityClass);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -130,7 +130,7 @@ public class MyPageActivity extends AppCompatActivity {
                     }
                     return;
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
+                Intent intent = new Intent(MyPageActivity.this, activityClass);
                 startActivity(intent);
             }
         };

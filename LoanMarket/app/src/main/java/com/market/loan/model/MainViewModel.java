@@ -53,7 +53,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<ProductResult> result = new Result<>("Network request failed.");
+                Result<ProductResult> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 MainViewModel.this.productResult.postValue(result);
             }
 
@@ -79,7 +79,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<List<MarqueeResult>> result = new Result<>("Network request failed.");
+                Result<List<MarqueeResult>> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 MainViewModel.this.marqueeResult.postValue(result);
             }
 

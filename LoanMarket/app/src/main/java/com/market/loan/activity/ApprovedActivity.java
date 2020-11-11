@@ -55,7 +55,7 @@ public class ApprovedActivity extends BaseActivity {
         approvedNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                Intent intent = new Intent(ApprovedActivity.this, PayActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -69,7 +69,7 @@ public class ApprovedActivity extends BaseActivity {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(ApprovedActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

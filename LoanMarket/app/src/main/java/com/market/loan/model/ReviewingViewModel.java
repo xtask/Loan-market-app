@@ -10,6 +10,7 @@ import com.market.loan.bean.ConfigResult;
 import com.market.loan.bean.ProductResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
+import com.market.loan.constant.Status;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 
@@ -40,7 +41,7 @@ public class ReviewingViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<ProductResult> result = new Result<>("Network request failed.");
+                Result<ProductResult> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 ReviewingViewModel.this.productResult.postValue(result);
             }
 

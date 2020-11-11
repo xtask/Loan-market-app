@@ -43,7 +43,7 @@ public class ApprovedViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<List<MarqueeResult>> result = new Result<>("Network request failed.");
+                Result<List<MarqueeResult>> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 ApprovedViewModel.this.marqueeResult.postValue(result);
             }
 

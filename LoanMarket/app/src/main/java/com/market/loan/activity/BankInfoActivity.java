@@ -70,7 +70,7 @@ public class BankInfoActivity extends BaseActivity {
                                 dismiss();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), ReviewingActivity.class);
+                                    Intent intent = new Intent(BankInfoActivity.this, ReviewingActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

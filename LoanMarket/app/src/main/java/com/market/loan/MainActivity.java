@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity {
                 } else if (id == R.id.selfInfoBtn) {
                     activityClass = MyPageActivity.class;
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
+                Intent intent = new Intent(MainActivity.this, activityClass);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectorActivity());
+                Intent intent = new Intent(MainActivity.this, selectorActivity());
                 startActivity(intent);
             }
         });
@@ -108,18 +108,18 @@ public class MainActivity extends BaseActivity {
                     List<Limit> limits = result.getData().getLimits();
                     Limit limit = limits.get(limits.size() - 1);
                     ConfigCache.amount = limit.getAmount();
-                    if (Phase.PAYMENT.toString().equals(phase)){
-                        Intent intent = new Intent(getApplicationContext(), selectorActivity());
+                    if (Phase.PAYMENT.toString().equals(phase)) {
+                        Intent intent = new Intent(MainActivity.this, selectorActivity());
                         startActivity(intent);
                         finish();
                         overridePendingTransition(0, 0);
-                    }else{
+                    } else {
                         showLayout.setVisibility(View.VISIBLE);
                         loadLoan(limits);
                         mainViewModel.getMarquee();
                     }
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     loadMarquee(result.getData());
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity {
                 marqueeListView.setLayoutManager(staggeredGridLayoutManager);
                 final MainMarqueeRecyclerViewAdapter adapter = new MainMarqueeRecyclerViewAdapter(MainActivity.this, marqueeResults, R.layout.activity_main_list_2);
 
-                if (!timerStatus){
+                if (!timerStatus) {
                     TimerTask task = new TimerTask() {
                         int index = 0;
 

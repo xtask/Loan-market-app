@@ -49,7 +49,7 @@ public class PayEndActivity extends BaseActivity {
                 }else if(id == R.id.selfInfoBtn){
                     activityClass = MyPageActivity.class;
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
+                Intent intent = new Intent(PayEndActivity.this, activityClass);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();
@@ -71,7 +71,7 @@ public class PayEndActivity extends BaseActivity {
                     }
                     loadLoan(vipsTemp);
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(PayEndActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

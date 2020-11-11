@@ -86,7 +86,7 @@ public class PayActivity extends BaseActivity {
                     detailsMain.setVisibility(View.GONE);
                     detailsList.setVisibility(View.VISIBLE);
                 } else if (id == R.id.payNow) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(PayActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -121,7 +121,7 @@ public class PayActivity extends BaseActivity {
                         }
                     }
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(PayActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -134,7 +134,7 @@ public class PayActivity extends BaseActivity {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     bankCardNumber.setText(result.getData().getBankAccountNo());
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(PayActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -9,6 +9,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.market.loan.bean.LoginResult;
 import com.market.loan.bean.Result;
 import com.market.loan.constant.Apis;
+import com.market.loan.constant.Status;
 import com.market.loan.http.HttpRequest;
 import com.market.loan.http.adapter.CallbackAdapter;
 
@@ -57,7 +58,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<LoginResult> result = new Result<>("Network request failed.");
+                Result<LoginResult> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 LoginViewModel.this.loginResult.postValue(result);
             }
             @Override
@@ -76,7 +77,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<String> result = new Result<>("Network request failed.");
+                Result<String> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 LoginViewModel.this.smsCode.postValue(result);
             }
             @Override

@@ -40,7 +40,7 @@ public class PayViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 super.onFailure(call, e);
-                Result<ProductResult> result = new Result<>("Network request failed.");
+                Result<ProductResult> result = new Result<>(Status.FAIL_CODE,"Network request failed.");
                 PayViewModel.this.productResult.postValue(result);
             }
 

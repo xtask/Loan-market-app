@@ -68,7 +68,7 @@ public class LoginActivity extends NoBarActivity {
                     SharedPreferences.Editor edit = profile.edit();
                     edit.putString("token", ConfigCache.token);
                     edit.apply();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

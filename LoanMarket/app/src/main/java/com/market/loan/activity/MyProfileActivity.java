@@ -35,7 +35,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 if (result.getStatus() == Status.SUCCESS_CODE) {
                     ConfigCache.userResult = result.getData();
                 } else if (result.getCode().equals(Status.ACCESS_DENIED_CODE)){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(MyProfileActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -68,7 +68,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 } else if (id == R.id.profileBankInfo) {
                     activityClass = ProfileBankInfoActivity.class;
                 }
-                Intent intent = new Intent(getApplicationContext(), activityClass);
+                Intent intent = new Intent(MyProfileActivity.this, activityClass);
                 startActivity(intent);
             }
         };

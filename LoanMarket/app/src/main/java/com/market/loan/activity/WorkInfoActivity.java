@@ -132,7 +132,7 @@ public class WorkInfoActivity extends BaseActivity {
                                 dismiss();
                                 assert response.body() != null;
                                 if (response.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), BankInfoActivity.class);
+                                    Intent intent = new Intent(WorkInfoActivity.this, BankInfoActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
