@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
         moneyPackageBtn.setOnClickListener(bottomClick);
         selfInfoBtn.setOnClickListener(bottomClick);
 
-        AppCompatImageButton moreLoanButton = findViewById(R.id.moreLoan);
+        final AppCompatImageButton moreLoanButton = findViewById(R.id.moreLoan);
         moreLoanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +115,7 @@ public class MainActivity extends BaseActivity {
                         overridePendingTransition(0, 0);
                     } else {
                         showLayout.setVisibility(View.VISIBLE);
+                        moreLoanButton.setVisibility(View.VISIBLE);
                         loadLoan(limits);
                         mainViewModel.getMarquee();
                     }
